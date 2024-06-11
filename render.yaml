@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: konnecThru-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: MONGO_URI
+        value: your_mongodb_uri_here
+      - key: JWT_SECRET
+        value: your_jwt_secret_here
+    autoDeploy: true
+
+  - type: web
+    name: konnecThru-frontend
+    env: node
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm start
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://your-backend-service-url.onrender.com
+    staticPublishPath: frontend/build
+    autoDeploy: true
