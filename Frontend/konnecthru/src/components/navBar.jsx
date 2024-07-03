@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
   navButtons: {
     display: "flex",
-    gap: "15px",
+    gap: "20px",
   },
   button: {
     color: "#3d52a0",
