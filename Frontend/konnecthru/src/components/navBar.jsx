@@ -1,9 +1,9 @@
 // src/components/NavBar.jsx
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/Authcontext'; // Ensure this is correctly imported
-import { logout } from '../services/authService'; // Import the logout function
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/Authcontext"; // Ensure this is correctly imported
+import { logout } from "../services/authService"; // Import the logout function
 
 const useStyles = makeStyles({
   navBar: {
@@ -36,7 +36,7 @@ function NavBar() {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/'); // Optionally navigate the user to the homepage or login page
+    navigate("/"); // Optionally navigate the user to the homepage or login page
   };
 
   return (
@@ -47,20 +47,36 @@ function NavBar() {
         className={classes.logo}
       />
       <div className={classes.navButtons}>
-        <Button className={classes.button} variant="contained" onClick={() => navigate('/')}>
+        <Button
+          className={classes.button}
+          variant="contained"
+          onClick={() => navigate("/")}
+        >
           Home
         </Button>
         {!currentUser ? (
           <>
-            <Button className={classes.button} variant="contained" onClick={() => navigate('/login')}>
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={() => navigate("/login")}
+            >
               Login
             </Button>
-            <Button className={classes.button} variant="contained" onClick={() => navigate('/register')}>
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={() => navigate("/register")}
+            >
               Register
             </Button>
           </>
         ) : (
-          <Button className={classes.button} variant="contained" onClick={handleLogout}>
+          <Button
+            className={classes.button}
+            variant="contained"
+            onClick={handleLogout}
+          >
             Logout
           </Button>
         )}
