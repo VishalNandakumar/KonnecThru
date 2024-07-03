@@ -1,7 +1,10 @@
+// src/components/NavBar.jsx
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/Authcontext'; // Ensure this is correctly imported
+import { logout } from '../services/authService'; // Import the logout function
 
-// Tailwind CSS classes and custom styles
 const useStyles = makeStyles({
   navBar: {
     display: "flex",
@@ -28,6 +31,13 @@ const useStyles = makeStyles({
 
 function NavBar() {
   const classes = useStyles();
+  const navigate = useNavigate();
+  const { currentUser } = useAuth(); // Use the current user from context
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/'); // Optionally navigate the user to the homepage or login page
+  };
 
   return (
     <nav className={classes.navBar}>
@@ -37,15 +47,23 @@ function NavBar() {
         className={classes.logo}
       />
       <div className={classes.navButtons}>
-        <Button className={classes.button} variant="contained">
+        <Button className={classes.button} variant="contained" onClick={() => navigate('/')}>
           Home
         </Button>
-        <Button className={classes.button} variant="contained">
-          Login
-        </Button>
-        <Button className={classes.button} variant="contained">
-          Register
-        </Button>
+        {!currentUser ? (
+          <>
+            <Button className={classes.button} variant="contained" onClick={() => navigate('/login')}>
+              Login
+            </Button>
+            <Button className={classes.button} variant="contained" onClick={() => navigate('/register')}>
+              Register
+            </Button>
+          </>
+        ) : (
+          <Button className={classes.button} variant="contained" onClick={handleLogout}>
+            Logout
+          </Button>
+        )}
       </div>
     </nav>
   );
