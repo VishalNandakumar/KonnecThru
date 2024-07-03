@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/Authcontext';
 
 const JobPostingForm = () => {
+  const { currentUser, loading } = useAuth();
   const [formData, setFormData] = useState({
     jobTitle: "",
     jobDescription: "",
@@ -15,6 +18,14 @@ const JobPostingForm = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  if (loading) {
+    return <div>Loading user data...</div>; // or a spinner, etc.
+  }
+
+  const isSubmitDisabled = !currentUser || isLoading;
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -90,15 +101,54 @@ const JobPostingForm = () => {
     return valid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      // Form submission logic here
-      console.log("Form submitted:", formData);
-      // Replace with actual form submission logic
-    } else {
+    if (!currentUser) {
+      console.error("No user data available");
+      return;
+    }
+
+    if (!validateForm()) {
       console.log("Form has errors. Please fix them.");
+      return;
+    }
+    setLoading(true);
+
+    console.log("current user",currentUser);
+    console.log("current user.uid",currentUser.uid);
+    console.log("current user.email",currentUser.email);
+
+    
+
+    try {
+
+      const postData = {
+        ...formData,
+        userId: currentUser.uid, // Include user ID
+        userEmail: currentUser.email // Include user email
+      };
+
+      const response = await fetch('http://localhost:5000/api/jobs/jobposting', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData)
+      });
+
+      if (!response.ok) {
+        throw new Error('HTTP error, status = ' + response.status);
+      }
+
+      const result = await response.json();
+      console.log("Form submitted successfully:", result);
+      alert('Form submitted successfully');
+      navigate('/'); // Navigate to a success page
+    } catch (error) {
+      console.error("Failed to submit the form:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -430,6 +480,7 @@ const JobPostingForm = () => {
             </button>
             <button
               type="submit"
+              disabled={isSubmitDisabled}
               className="px-4 py-2 bg-firstColor text-white rounded-md shadow-sm hover:bg-secoundColor"
             >
               Post Job
