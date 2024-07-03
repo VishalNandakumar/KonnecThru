@@ -54,6 +54,21 @@ function NavBar() {
         >
           Home
         </Button>
+        <Button className={classes.button} variant="contained" onClick={() => navigate('/job-listings')}>
+          Job Listings
+        </Button>
+        <Button className={classes.button} variant="contained" onClick={() => navigate('/post-a-job')}>
+          Post a Job
+        </Button>
+        <Button className={classes.button} variant="contained" onClick={() => navigate('/referrals')}>
+          Referrals
+        </Button>
+        <Button className={classes.button} variant="contained" onClick={() => navigate('/events')}>
+          Events
+        </Button>
+        <Button className={classes.button} variant="contained" onClick={() => navigate('/contact-us')}>
+          Contact Us
+        </Button>
         {!currentUser ? (
           <>
             <Button
