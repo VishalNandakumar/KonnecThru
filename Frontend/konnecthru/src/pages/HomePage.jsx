@@ -1,9 +1,9 @@
+// src/components/HomePage.jsx
 import { createGlobalStyle } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcase, faCalendarAlt, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import banner from '../assets/imgs/46.png';  
 import reviewImage from '../assets/imgs/review.jpg';
-
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -125,66 +125,6 @@ const styles = {
     maxWidth: '1200px',
     margin: '0 auto'
   },
-  feature: {
-    textAlign: 'center'
-  },
-  featureIcon: {
-    fontSize: '50px',
-    color: '#3D52A0',
-    marginBottom: '20px'
-  },
-  featureTitle: {
-    marginBottom: '10px'
-  },
-  testimonials: {
-    backgroundColor: '#F5F6F7',
-    padding: '50px 20px',
-    textAlign: 'center'
-  },
-  testimonialsContainer: {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    display: 'flex',  // Use flexbox
-    gap: '20px',  // Add some spacing between testimonials
-    flexWrap: 'wrap',  // Allow wrapping to next line if needed
-    justifyContent: 'center'  // Center the testimonials
-  },
-  testimonialTitle: {
-    marginBottom: '30px'
-  },
-  testimonial: {
-    backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '5px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-    marginBottom: '20px',
-    flex: '0 1 calc(33.333% - 40px)',  // Allow three testimonials per row
-    display: 'flex',  // Flex layout for content inside
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center'
-  },
-   testimonialImage: {
-    width: '80px',
-    height: '80px',
-    borderRadius: '50%',
-    objectFit: 'cover',
-    marginBottom: '10px'
-  },
-  
-  testimonialAuthor: {
-    marginTop: '10px'
-  },
-  footer: {
-    backgroundColor: '#3D52A0',
-    color: '#fff',
-    textAlign: 'center',
-    padding: '20px 0'
-  },
-  footerContainer: {
-    maxWidth: '1200px',
-    margin: '0 auto'
-  },
   loginSection: {
     backgroundColor: '#F5F6F7',
     padding: '50px 20px',
@@ -222,17 +162,15 @@ function HomePage() {
   return (
     <>
       <GlobalStyle />
-     
 
       <section style={styles.hero}>
-  <div style={styles.heroTextContainer}>
-    <h2 style={styles.heroTitle}>Welcome to KonnecThru</h2>
-    <p style={styles.heroText}>Your one-stop solution for all part-time job-related needs for students.</p>
-    <a href="#" style={styles.btn}>Get Started</a>
-  </div>
-  <img src={banner} alt="KonnecThru" style={styles.heroImage} />
-</section>
-
+        <div style={styles.heroTextContainer}>
+          <h2 style={styles.heroTitle}>Welcome to KonnecThru</h2>
+          <p style={styles.heroText}>Your one-stop solution for all part-time job-related needs for students.</p>
+          <a href="/login" style={styles.btn}>Get Started</a>
+        </div>
+        <img src={banner} alt="KonnecThru" style={styles.heroImage} />
+      </section>
 
       <section style={styles.features}>
         <div style={styles.featureContainer}>
@@ -255,30 +193,24 @@ function HomePage() {
       </section>
 
       <section style={styles.testimonials}>
-  <div style={styles.testimonialsContainer}>
-    <div style={styles.testimonial}>
-      <img src={reviewImage} alt="User" style={styles.testimonialImage} /> 
-      <p>"KonnecThru made my job search so much easier and quicker!"</p>
-      <h4 style={styles.testimonialAuthor}>- Sunny</h4>
-    </div>
-    <div style={styles.testimonial}>
-      <img src={reviewImage} alt="User" style={styles.testimonialImage} />
-      <p>"The referral system is a game-changer. I got hired within a week."</p>
-      <h4 style={styles.testimonialAuthor}>- Sai</h4>
-    </div>
-    <div style={styles.testimonial}>
-      <img src={reviewImage} alt="User" style={styles.testimonialImage} />
-      <p>"The referral system is a game-changer. I got hired within a week."</p>
-      <h4 style={styles.testimonialAuthor}>- Vishal</h4>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-      
+        <div style={styles.testimonialsContainer}>
+          <div style={styles.testimonial}>
+            <img src={reviewImage} alt="User" style={styles.testimonialImage} /> 
+            <p>KonnecThru made my job search so much easier and quicker</p>
+            <h4 style={styles.testimonialAuthor}>- Sunny</h4>
+          </div>
+          <div style={styles.testimonial}>
+            <img src={reviewImage} alt="User" style={styles.testimonialImage} />
+            <p>The referral system is a game-changer. I got hired within a week</p>
+            <h4 style={styles.testimonialAuthor}>- Sai</h4>
+          </div>
+          <div style={styles.testimonial}>
+            <img src={reviewImage} alt="User" style={styles.testimonialImage} />
+            <p>The referral system is a game-changer. I got hired within a week</p>
+            <h4 style={styles.testimonialAuthor}>- Vishal</h4>
+          </div>
+        </div>
+      </section>
 
       <footer style={styles.footer}>
         <div style={styles.footerContainer}>

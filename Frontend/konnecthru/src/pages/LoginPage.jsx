@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import { Button, TextField } from "@mui/material";
+import logo from '../assets/logo_without_text_no_background.png';  
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ function LoginPage() {
         <div className="md:w-1/2 p-8">
           <div className="flex items-center justify-center mb-6">
             <img
-              src="../src/assets/imgs/logo/logo_without_text_no_background.png"
+              src={logo}
               alt="KonnecThru Logo"
               className="h-10"
             />

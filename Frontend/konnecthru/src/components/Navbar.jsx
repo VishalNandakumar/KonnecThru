@@ -2,8 +2,9 @@
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/Authcontext"; // Ensure this is correctly imported
-import { logout } from "../services/authService"; // Import the logout function
+import { useAuth } from "../contexts/Authcontext";
+import { logout } from "../services/authService"; 
+import logo from '../assets/logo_without_text_no_background.png';  
 
 const useStyles = makeStyles({
   navBar: {
@@ -11,20 +12,33 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px 20px",
+    backgroundColor: "#ffffff",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  },
+  logoContainer: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
   },
   logo: {
     height: "50px",
   },
   navButtons: {
     display: "flex",
-    gap: "20px",
+    gap: "10px",
   },
   button: {
-    color: "#3d52a0",
-    backgroundColor: "#kd351j",
+    color: "#ffffff",
+    backgroundColor: "#3d52a0",
     "&:hover": {
       backgroundColor: "#7091e6",
-      color: "#f5f6f7",
+    },
+  },
+  primaryButton: {
+    color: "#ffffff",
+    backgroundColor: "#3d52a0",
+    "&:hover": {
+      backgroundColor: "#7091e6",
     },
   },
 });
@@ -40,18 +54,18 @@ function NavBar() {
   };
 
   return (
-    <header className="bg-white shadow flex justify-between items-center py-6 px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center space-x-4">
+    <header className={classes.navBar}>
+      <div className={classes.logoContainer}>
         <img
-          src="../src/assets/imgs/logo/logo_without_text_no_background.png"
+          src={logo}
           alt="KonnecThru Logo"
-          className="h-10"
+          className={classes.logo}
         />
         <h1 className="text-3xl font-bold text-gray-900">Konnecthru</h1>
       </div>
-      <div className="flex space-x-4">
+      <div className={classes.navButtons}>
         <Button
-          className="bg-blue-500 text-white py-2 px-4 rounded"
+          className={classes.primaryButton}
           variant="contained"
           onClick={() => navigate("/")}
         >
@@ -75,14 +89,14 @@ function NavBar() {
         {!currentUser ? (
           <>
             <Button
-              className="bg-blue-500 text-white py-2 px-4 rounded"
+              className={classes.primaryButton}
               variant="contained"
               onClick={() => navigate("/login")}
             >
               Login
             </Button>
             <Button
-              className="bg-blue-500 text-white py-2 px-4 rounded"
+              className={classes.primaryButton}
               variant="contained"
               onClick={() => navigate("/register")}
             >
@@ -90,7 +104,7 @@ function NavBar() {
             </Button>
           </>
         ) : (
-          <div className="flex flex-row gap-x-5">
+          <div className={classes.navButtons}>
             <Button
               className={classes.button}
               variant="contained"
@@ -106,7 +120,7 @@ function NavBar() {
               Post a Referral
             </Button>
             <Button
-              className="bg-blue-500 text-white py-2 px-4 rounded"
+              className={classes.primaryButton}
               variant="contained"
               onClick={handleLogout}
             >

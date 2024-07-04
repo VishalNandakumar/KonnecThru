@@ -58,6 +58,7 @@ const ReferralPostingForm = () => {
           userID: currentUser.uid,
         });
         console.log("Form submitted successfully:", result);
+        alert('Form submitted successfully');
         // Replace with actual form submission logic
       } catch (error) {
         console.error("Error submitting form:", error.message);
