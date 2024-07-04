@@ -1,50 +1,55 @@
 // src/components/NavBar.jsx
-import { Button } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/Authcontext";
 import { logout } from "../services/authService"; 
+import styled from 'styled-components';
 import logo from '../assets/logo_without_text_no_background.png';  
 
-const useStyles = makeStyles({
-  navBar: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "10px 20px",
-    backgroundColor: "#ffffff",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  },
-  logoContainer: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-  },
-  logo: {
-    height: "50px",
-  },
-  navButtons: {
-    display: "flex",
-    gap: "10px",
-  },
-  button: {
-    color: "#ffffff",
-    backgroundColor: "#3d52a0",
-    "&:hover": {
-      backgroundColor: "#7091e6",
-    },
-  },
-  primaryButton: {
-    color: "#ffffff",
-    backgroundColor: "#3d52a0",
-    "&:hover": {
-      backgroundColor: "#7091e6",
-    },
-  },
-});
+const NavBarContainer = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const Logo = styled.img`
+  height: 50px;
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  font-weight: bold;
+  color: #3d52a0;
+`;
+
+const NavButtons = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: ${props => (props.primary ? "#3d52a0" : "#e0e0e0")};
+  color: ${props => (props.primary ? "#ffffff" : "#3d52a0")};
+
+  &:hover {
+    background-color: ${props => (props.primary ? "#7091e6" : "#d1d1d1")};
+  }
+`;
 
 function NavBar() {
-  const classes = useStyles();
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
@@ -54,82 +59,46 @@ function NavBar() {
   };
 
   return (
-    <header className={classes.navBar}>
-      <div className={classes.logoContainer}>
-        <img
-          src={logo}
-          alt="KonnecThru Logo"
-          className={classes.logo}
-        />
-        <h1 className="text-3xl font-bold text-gray-900">Konnecthru</h1>
-      </div>
-      <div className={classes.navButtons}>
-        <Button
-          className={classes.primaryButton}
-          variant="contained"
-          onClick={() => navigate("/")}
-        >
+    <NavBarContainer>
+      <LogoContainer>
+        <Logo src={logo} alt="KonnecThru Logo" />
+        <Title>KonnecThru</Title>
+      </LogoContainer>
+      <NavButtons>
+        <Button primary onClick={() => navigate("/")}>
           Home
         </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          onClick={() => navigate("/job-listings")}
-        >
+        <Button onClick={() => navigate("/job-listings")}>
           Job Listings
         </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          onClick={() => navigate("/referral-listings")}
-        >
+        <Button onClick={() => navigate("/referral-listings")}>
           Referral Listings
         </Button>
 
         {!currentUser ? (
           <>
-            <Button
-              className={classes.primaryButton}
-              variant="contained"
-              onClick={() => navigate("/login")}
-            >
+            <Button primary onClick={() => navigate("/login")}>
               Login
             </Button>
-            <Button
-              className={classes.primaryButton}
-              variant="contained"
-              onClick={() => navigate("/register")}
-            >
+            <Button primary onClick={() => navigate("/register")}>
               Register
             </Button>
           </>
         ) : (
-          <div className={classes.navButtons}>
-            <Button
-              className={classes.button}
-              variant="contained"
-              onClick={() => navigate("/post-a-job")}
-            >
+          <NavButtons>
+            <Button onClick={() => navigate("/post-a-job")}>
               Post a Job
             </Button>
-            <Button
-              className={classes.button}
-              variant="contained"
-              onClick={() => navigate("/post-a-referral")}
-            >
+            <Button onClick={() => navigate("/post-a-referral")}>
               Post a Referral
             </Button>
-            <Button
-              className={classes.primaryButton}
-              variant="contained"
-              onClick={handleLogout}
-            >
+            <Button primary onClick={handleLogout}>
               Logout
             </Button>
-          </div>
+          </NavButtons>
         )}
-      </div>
-    </header>
+      </NavButtons>
+    </NavBarContainer>
   );
 }
 
