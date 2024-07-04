@@ -20,142 +20,145 @@ const GlobalStyle = createGlobalStyle`
 
 const styles = {
   hero: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    color: '#333',
-    padding: '100px 20px',
-    backgroundColor: '#fff'
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    color: "#333",
+    padding: "100px 20px",
+    backgroundColor: "#fff",
   },
   heroTextContainer: {
-    flex: '1',
-    padding: '20px',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    marginRight: '20px',
-    borderRadius: '5px'
+    flex: "1",
+    padding: "20px",
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    marginRight: "20px",
+    borderRadius: "5px",
+    fontSize: "20px",
   },
   heroImage: {
-    flex: '1',
-    maxWidth: '35%',
-    height: 'auto',
-    maxHeight: '500px',
-    borderRadius: '5px'
+    flex: "1",
+    maxWidth: "35%",
+    height: "auto",
+    maxHeight: "500px",
+    borderRadius: "5px",
   },
   heroTitle: {
-    fontSize: '36px',
-    marginBottom: '20px'
+    fontSize: "42px",
+    fontWeight: "bold",
+    marginBottom: "20px",
   },
   heroText: {
-    fontSize: '18px',
-    marginBottom: '20px'
+    fontSize: "24px",
+    marginBottom: "20px",
+    width: "50%",
   },
   btn: {
-    backgroundColor: '#3D52A0',
-    color: '#fff',
-    padding: '10px 20px',
-    textDecoration: 'none',
-    borderRadius: '5px'
+    backgroundColor: "#3D52A0",
+    color: "#fff",
+    padding: "10px 20px",
+    textDecoration: "none",
+    borderRadius: "5px",
   },
   features: {
-    backgroundColor: '#ADBBDA',
-    padding: '50px 20px'
+    backgroundColor: "#ADBBDA",
+    padding: "50px 20px",
   },
   featureContainer: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    maxWidth: '1200px',
-    margin: '0 auto'
+    display: "flex",
+    justifyContent: "space-around",
+    maxWidth: "1200px",
+    margin: "0 auto",
   },
   feature: {
-    textAlign: 'center'
+    textAlign: "center",
   },
   featureIcon: {
-    fontSize: '50px',
-    color: '#3D52A0',
-    marginBottom: '20px'
+    fontSize: "50px",
+    color: "#3D52A0",
+    marginBottom: "20px",
   },
   featureTitle: {
-    marginBottom: '10px'
+    marginBottom: "10px",
   },
   testimonials: {
-    backgroundColor: '#F5F6F7',
-    padding: '50px 20px',
-    textAlign: 'center'
+    backgroundColor: "#F5F6F7",
+    padding: "50px 20px",
+    textAlign: "center",
   },
   testimonialsContainer: {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    display: 'flex',
-    gap: '20px',
-    flexWrap: 'wrap',
-    justifyContent: 'center'
+    maxWidth: "1200px",
+    margin: "0 auto",
+    display: "flex",
+    gap: "20px",
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
   testimonialTitle: {
-    marginBottom: '30px'
+    marginBottom: "30px",
   },
   testimonial: {
-    backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '5px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-    marginBottom: '20px',
-    flex: '0 1 calc(33.333% - 40px)',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center'
+    backgroundColor: "#fff",
+    padding: "20px",
+    borderRadius: "5px",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+    marginBottom: "20px",
+    flex: "0 1 calc(33.333% - 40px)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
   },
   testimonialImage: {
-    width: '80px',
-    height: '80px',
-    borderRadius: '50%',
-    objectFit: 'cover',
-    marginBottom: '10px'
+    width: "80px",
+    height: "80px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    marginBottom: "10px",
   },
   testimonialAuthor: {
-    marginTop: '10px'
+    marginTop: "10px",
   },
   footer: {
-    backgroundColor: '#3D52A0',
-    color: '#fff',
-    textAlign: 'center',
-    padding: '20px 0'
+    backgroundColor: "#3D52A0",
+    color: "#fff",
+    textAlign: "center",
+    padding: "20px 0",
   },
   footerContainer: {
-    maxWidth: '1200px',
-    margin: '0 auto'
+    maxWidth: "1200px",
+    margin: "0 auto",
   },
   loginSection: {
-    backgroundColor: '#F5F6F7',
-    padding: '50px 20px',
-    textAlign: 'center'
+    backgroundColor: "#F5F6F7",
+    padding: "50px 20px",
+    textAlign: "center",
   },
   loginContainer: {
-    maxWidth: '500px',
-    margin: '0 auto',
-    backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '5px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+    maxWidth: "500px",
+    margin: "0 auto",
+    backgroundColor: "#fff",
+    padding: "20px",
+    borderRadius: "5px",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
   },
   loginTitle: {
-    marginBottom: '20px'
+    marginBottom: "20px",
   },
   loginInput: {
-    width: '100%',
-    padding: '10px',
-    margin: '10px 0',
-    borderRadius: '5px',
-    border: '1px solid #ccc'
+    width: "100%",
+    padding: "10px",
+    margin: "10px 0",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
   },
   loginButton: {
-    backgroundColor: '#3D52A0',
-    color: '#fff',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer'
-  }
+    backgroundColor: "#3D52A0",
+    color: "#fff",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
 };
 
 function HomePage() {
@@ -211,7 +214,6 @@ function HomePage() {
           </div>
         </div>
       </section>
-
       <footer style={styles.footer}>
         <div style={styles.footerContainer}>
           <p>&copy; 2024 KonnecThru. All rights reserved.</p>
