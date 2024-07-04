@@ -37,4 +37,13 @@ router.post("/referral-post", async (req, res) => {
   }
 });
 
+router.get("/referralpostings", async (req, res) => {
+  try {
+    const referrals = await Referral.find({});
+    res.json(referrals);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching referrals", error: error });
+  }
+});
+
 module.exports = router;
