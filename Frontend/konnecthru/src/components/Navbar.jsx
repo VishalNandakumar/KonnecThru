@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
   button: {
     color: "#3d52a0",
-    backgroundColor: "#f5f6f7",
+    backgroundColor: "#kd351j",
     "&:hover": {
       backgroundColor: "#7091e6",
       color: "#f5f6f7",
@@ -57,21 +57,21 @@ function NavBar() {
         >
           Home
         </Button>
-        <Button className={classes.button} variant="contained" onClick={() => navigate('/job-listings')}>
+        <Button
+          className={classes.button}
+          variant="contained"
+          onClick={() => navigate("/job-listings")}
+        >
           Job Listings
         </Button>
-        <Button className={classes.button} variant="contained" onClick={() => navigate('/post-a-job')}>
-          Post a Job
+        <Button
+          className={classes.button}
+          variant="contained"
+          onClick={() => navigate("/referral-listings")}
+        >
+          Referral Listings
         </Button>
-        <Button className={classes.button} variant="contained" onClick={() => navigate('/referrals')}>
-          Referrals
-        </Button>
-        <Button className={classes.button} variant="contained" onClick={() => navigate('/events')}>
-          Events
-        </Button>
-        <Button className={classes.button} variant="contained" onClick={() => navigate('/contact-us')}>
-          Contact Us
-        </Button>
+
         {!currentUser ? (
           <>
             <Button
@@ -90,13 +90,29 @@ function NavBar() {
             </Button>
           </>
         ) : (
-          <Button
-            className="bg-blue-500 text-white py-2 px-4 rounded"
-            variant="contained"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
+          <div className="flex flex-row gap-x-5">
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={() => navigate("/post-a-job")}
+            >
+              Post a Job
+            </Button>
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={() => navigate("/post-a-referral")}
+            >
+              Post a Referral
+            </Button>
+            <Button
+              className="bg-blue-500 text-white py-2 px-4 rounded"
+              variant="contained"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </div>
         )}
       </div>
     </header>

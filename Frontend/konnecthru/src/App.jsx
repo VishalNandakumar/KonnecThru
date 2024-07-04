@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/Authcontext"; // Import AuthProvider
+import { AuthProvider } from "./contexts/Authcontext";
+import NavBar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import NavBar from "./components/Navbar";
-
+import JobPostingForm from "./pages/JobPostingForm";
 import ListingPage from "./pages/ListingPage";
+import ReferralListingPage from "./pages/ReferralListingPage";
+import ReferralPostingForm from "./pages/ReferralPostingForm";
 
 function App() {
   return (
@@ -16,9 +18,12 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/post-a-job" element={<JobPostingForm />} />
+          <Route path="/job-listings" element={<ListingPage />} />
+          <Route path="/referral-listings" element={<ReferralListingPage />} />
+          <Route path="/post-a-referral" element={<ReferralPostingForm />} />
         </Routes>
       </Router>
-      <ListingPage />
     </AuthProvider>
   );
 }
