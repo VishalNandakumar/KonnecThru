@@ -12,7 +12,7 @@ const ListingPage = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch('http://localhost:5000/api/jobs/jobpostings');
+        const response = await fetch('https://konnecthru.onrender.com/api/jobs/jobpostings');
         if (!response.ok) {
           // This will capture HTTP errors such as 500, 404 etc.
           throw new Error(`HTTP error! status: ${response.status}`);

@@ -1,7 +1,7 @@
 export const submitJobPosting = async (formData) => {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/referrals/referral-post",
+      "https://konnecthru.onrender.com/api/referrals/referral-post",
       {
         method: "POST",
         headers: {

@@ -129,7 +129,7 @@ const JobPostingForm = () => {
         userEmail: currentUser.email // Include user email
       };
 
-      const response = await fetch('http://localhost:5000/api/jobs/jobposting', {
+      const response = await fetch('https://konnecthru.onrender.com/api/jobs/jobposting', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
