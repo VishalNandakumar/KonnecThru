@@ -1,9 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const User = require('../models/User'); // Ensure this path is correct
+const User = require("../models/User");
 
-// POST endpoint for user registration
-router.post('/register', async (req, res) => {
+router.post("/register", async (req, res) => {
   const { userId, email, name, dob, phoneNumber, userType } = req.body;
 
   try {
@@ -13,19 +12,19 @@ router.post('/register', async (req, res) => {
       name,
       dob,
       phoneNumber,
-      userType
+      userType,
     });
 
     await newUser.save();
     res.status(201).json({
-      message: 'User registered successfully',
-      user: newUser
+      message: "User registered successfully",
+      user: newUser,
     });
   } catch (error) {
-    console.error('Error registering user:', error);
+    console.error("Error registering user:", error);
     res.status(500).json({
-      error: 'Failed to register user',
-      details: error.message
+      error: "Failed to register user",
+      details: error.message,
     });
   }
 });
