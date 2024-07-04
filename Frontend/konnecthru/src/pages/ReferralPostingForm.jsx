@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { submitJobPosting } from "../services/referralService";
+import { useAuth } from "../contexts/Authcontext";
 
 const ReferralPostingForm = () => {
+  const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
     referralName: "",
     referralEmail: "",
@@ -44,13 +47,21 @@ const ReferralPostingForm = () => {
     return valid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      // Form submission logic here
-      console.log("Form submitted:", formData);
-      // Replace with actual form submission logic
+      try {
+        const result = await submitJobPosting({
+          ...formData,
+          userEmail: currentUser.email,
+          userID: currentUser.uid,
+        });
+        console.log("Form submitted successfully:", result);
+        // Replace with actual form submission logic
+      } catch (error) {
+        console.error("Error submitting form:", error.message);
+      }
     } else {
       console.log("Form has errors. Please fix them.");
     }
@@ -65,6 +76,7 @@ const ReferralPostingForm = () => {
         <form
           onSubmit={handleSubmit}
           className="bg-white p-6 rounded-lg shadow-lg space-y-6"
+          method="post"
         >
           <div>
             <label

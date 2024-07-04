@@ -5,13 +5,11 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
-import JobPostingForm from "./pages/JobPostingForm";
+import ListingPage from "./pages/ListingPage";
 
 function App() {
   return (
     <AuthProvider>
-      {" "}
-      {/* Wrap components in AuthProvider */}
       <Router>
         <NavBar />
         <Routes>
@@ -19,8 +17,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
-      <JobPostingForm />
       </Router>
+      <ListingPage />
     </AuthProvider>
   );
 }

@@ -32,23 +32,26 @@ const useStyles = makeStyles({
 function NavBar() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const { currentUser } = useAuth(); // Use the current user from context
+  const { currentUser } = useAuth();
 
   const handleLogout = async () => {
     await logout();
-    navigate("/"); // Optionally navigate the user to the homepage or login page
+    navigate("/");
   };
 
   return (
-    <nav className={classes.navBar}>
-      <img
-        src="../src/assets/imgs/logo/logo_without_text_no_background.png"
-        alt="KonnecThru Logo"
-        className={classes.logo}
-      />
-      <div className={classes.navButtons}>
+    <header className="bg-white shadow flex justify-between items-center py-6 px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center space-x-4">
+        <img
+          src="../src/assets/imgs/logo/logo_without_text_no_background.png"
+          alt="KonnecThru Logo"
+          className="h-10"
+        />
+        <h1 className="text-3xl font-bold text-gray-900">Konnecthru</h1>
+      </div>
+      <div className="flex space-x-4">
         <Button
-          className={classes.button}
+          className="bg-blue-500 text-white py-2 px-4 rounded"
           variant="contained"
           onClick={() => navigate("/")}
         >
@@ -72,14 +75,14 @@ function NavBar() {
         {!currentUser ? (
           <>
             <Button
-              className={classes.button}
+              className="bg-blue-500 text-white py-2 px-4 rounded"
               variant="contained"
               onClick={() => navigate("/login")}
             >
               Login
             </Button>
             <Button
-              className={classes.button}
+              className="bg-blue-500 text-white py-2 px-4 rounded"
               variant="contained"
               onClick={() => navigate("/register")}
             >
@@ -88,7 +91,7 @@ function NavBar() {
           </>
         ) : (
           <Button
-            className={classes.button}
+            className="bg-blue-500 text-white py-2 px-4 rounded"
             variant="contained"
             onClick={handleLogout}
           >
@@ -96,7 +99,7 @@ function NavBar() {
           </Button>
         )}
       </div>
-    </nav>
+    </header>
   );
 }
 
