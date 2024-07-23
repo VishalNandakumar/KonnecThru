@@ -1,9 +1,9 @@
-// src/pages/LoginPage.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import { Button, TextField } from "@mui/material";
-import logo from '../assets/logo_without_text_no_background.png';  
+import logo from '../assets/logo_without_text_no_background.png';
+import loginImage from '../assets/login-image.webp';  // Ensure the correct path
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -22,9 +22,9 @@ function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="md:w-1/2 p-8">
-          <div className="flex items-center justify-center mb-6">
+      <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden m-0 md:m-4">
+        <div className="w-full md:w-1/2 p-8" style={{ marginBottom: '13rem' }}>
+          <div className="hidden md:flex items-center justify-center mb-6">
             <img
               src={logo}
               alt="KonnecThru Logo"
@@ -86,7 +86,7 @@ function LoginPage() {
         <div className="hidden md:flex md:w-1/2 bg-firstColor items-center justify-center p-8">
           <div className="text-center text-white">
             <img
-              src="../src/assets/login-image.webp"
+              src={loginImage}
               alt="Dashboard Illustration"
               className="h-50 w-60 mx-auto mb-4"
             />
