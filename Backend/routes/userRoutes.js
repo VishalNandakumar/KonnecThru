@@ -38,7 +38,18 @@ router.get("/:firebaseUserId", async (req, res) => {
     res.json(user);
   } catch (error) {
     console.error("Error fetching user details:", error);
-    res.status(500).json({ message: "Error fetching user details", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching user details", error: error.message });
+  }
+});
+
+router.get("/allUsers", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching ", error: error });
   }
 });
 
