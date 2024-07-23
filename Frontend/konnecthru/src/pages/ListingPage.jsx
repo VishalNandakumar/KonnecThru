@@ -12,15 +12,12 @@ const ListingPage = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const API_URL = import.meta.env.VITE_API_URL;
-
-        const response = await fetch(`${API_URL}/api/jobs/jobpostings`);
+        const response = await fetch('https://konnecthru.onrender.com/api/jobs/jobpostings');
         if (!response.ok) {
           // This will capture HTTP errors such as 500, 404 etc.
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log("datadatadatadatadatadata",data);
         setJobListings(data);
       } catch (error) {
         // Here we capture any network error or one thrown from response status check
