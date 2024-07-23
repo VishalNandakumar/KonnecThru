@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Referral = require("../models/Referral");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Job = require("../models/Job"); // Import Job model
 const User = require("../models/User"); // Import User model if needed for notifications
-
 
 router.post("/referral-post", async (req, res) => {
   const {
@@ -14,7 +13,7 @@ router.post("/referral-post", async (req, res) => {
     referralEmail,
     referralCompany,
     description,
-    jobId
+    jobId,
   } = req.body;
 
   try {
@@ -31,7 +30,7 @@ router.post("/referral-post", async (req, res) => {
       referralEmail: referralEmail,
       referralCompany: referralCompany,
       description: description,
-      jobPostingId: jobId
+      jobPostingId: jobId,
     });
 
     await newReferral.save();
@@ -81,7 +80,9 @@ router.get("/:id", async (req, res) => {
     }
     res.json(referral);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching referral", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching referral", error: error.message });
   }
 });
 

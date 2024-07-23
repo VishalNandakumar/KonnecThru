@@ -1,0 +1,21 @@
+@media (max-width: 768px) {
+  .top-container-admin {
+    flex-direction: column;
+  }
+
+  .nav-admin {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .top-nav-container-admin {
+    width: 100%;
+  }
+
+  .ul-admin {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
