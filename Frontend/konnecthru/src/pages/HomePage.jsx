@@ -21,36 +21,36 @@ const GlobalStyle = createGlobalStyle`
 const styles = {
   hero: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     color: "#333",
-    padding: "100px 20px",
+    padding: "50px 20px",
     backgroundColor: "#fff",
   },
   heroTextContainer: {
     flex: "1",
     padding: "20px",
     backgroundColor: "rgba(255, 255, 255, 0.8)",
-    marginRight: "20px",
+    marginBottom: "20px",
     borderRadius: "5px",
-    fontSize: "20px",
+    textAlign: "center",
   },
   heroImage: {
     flex: "1",
-    maxWidth: "35%",
+    width: "80%",
     height: "auto",
     maxHeight: "500px",
     borderRadius: "5px",
   },
   heroTitle: {
-    fontSize: "42px",
+    fontSize: "32px",
     fontWeight: "bold",
     marginBottom: "20px",
   },
   heroText: {
-    fontSize: "24px",
+    fontSize: "18px",
     marginBottom: "20px",
-    width: "50%",
   },
   btn: {
     backgroundColor: "#3D52A0",
@@ -65,12 +65,12 @@ const styles = {
   },
   featureContainer: {
     display: "flex",
-    justifyContent: "space-around",
-    maxWidth: "1200px",
-    margin: "0 auto",
+    flexDirection: "column",
+    alignItems: "center",
   },
   feature: {
     textAlign: "center",
+    marginBottom: "20px",
   },
   featureIcon: {
     fontSize: "50px",
@@ -86,12 +86,10 @@ const styles = {
     textAlign: "center",
   },
   testimonialsContainer: {
-    maxWidth: "1200px",
-    margin: "0 auto",
     display: "flex",
+    flexDirection: "column",
     gap: "20px",
-    flexWrap: "wrap",
-    justifyContent: "center",
+    alignItems: "center",
   },
   testimonialTitle: {
     marginBottom: "30px",
@@ -102,7 +100,7 @@ const styles = {
     borderRadius: "5px",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
     marginBottom: "20px",
-    flex: "0 1 calc(33.333% - 40px)",
+    width: "90%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -127,37 +125,6 @@ const styles = {
   footerContainer: {
     maxWidth: "1200px",
     margin: "0 auto",
-  },
-  loginSection: {
-    backgroundColor: "#F5F6F7",
-    padding: "50px 20px",
-    textAlign: "center",
-  },
-  loginContainer: {
-    maxWidth: "500px",
-    margin: "0 auto",
-    backgroundColor: "#fff",
-    padding: "20px",
-    borderRadius: "5px",
-    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-  },
-  loginTitle: {
-    marginBottom: "20px",
-  },
-  loginInput: {
-    width: "100%",
-    padding: "10px",
-    margin: "10px 0",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-  },
-  loginButton: {
-    backgroundColor: "#3D52A0",
-    color: "#fff",
-    padding: "10px 20px",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
   },
 };
 

@@ -1,8 +1,11 @@
 // src/components/NavBar.jsx
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/Authcontext";
 import { logout } from "../services/authService"; 
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo_without_text_no_background.png';  
 
 const NavBarContainer = styled.header`
@@ -33,6 +36,18 @@ const Title = styled.h1`
 const NavButtons = styled.div`
   display: flex;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    background-color: #ffffff;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 200px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: ${props => (props.open ? 'flex' : 'none')};
+  }
 `;
 
 const Button = styled.button`
@@ -49,13 +64,29 @@ const Button = styled.button`
   }
 `;
 
+const HamburgerButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
 function NavBar() {
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
   const handleLogout = async () => {
     await logout();
-    navigate("/");
+    navigate("/login");
+  };
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -64,38 +95,23 @@ function NavBar() {
         <Logo src={logo} alt="KonnecThru Logo" />
         <Title>KonnecThru</Title>
       </LogoContainer>
-      <NavButtons>
-        <Button primary onClick={() => navigate("/")}>
-          Home
-        </Button>
-        <Button onClick={() => navigate("/job-listings")}>
-          Job Listings
-        </Button>
-        <Button onClick={() => navigate("/referral-listings")}>
-          Referral Listings
-        </Button>
-
-        {!currentUser ? (
+      <HamburgerButton onClick={toggleMenu}>
+        <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
+      </HamburgerButton>
+      <NavButtons open={isOpen}>
+        <Button primary onClick={() => navigate("/")}>Home</Button>
+        <Button onClick={() => navigate("/job-listings")}>Job Listings</Button>
+        <Button onClick={() => navigate("/referral-listings")}>Referral Listings</Button>
+        {currentUser ? (
           <>
-            <Button primary onClick={() => navigate("/login")}>
-              Login
-            </Button>
-            <Button primary onClick={() => navigate("/register")}>
-              Register
-            </Button>
+            <Button primary onClick={() => navigate("/dashboard")}>Dashboard</Button>
+            <Button onClick={handleLogout}>Logout</Button>
           </>
         ) : (
-          <NavButtons>
-            <Button onClick={() => navigate("/post-a-job")}>
-              Post a Job
-            </Button>
-            <Button onClick={() => navigate("/post-a-referral")}>
-              Post a Referral
-            </Button>
-            <Button primary onClick={handleLogout}>
-              Logout
-            </Button>
-          </NavButtons>
+          <>
+            <Button primary onClick={() => navigate("/login")}>Login</Button>
+            <Button onClick={() => navigate("/signup")}>Sign Up</Button>
+          </>
         )}
       </NavButtons>
     </NavBarContainer>

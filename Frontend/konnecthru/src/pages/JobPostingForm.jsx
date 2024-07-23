@@ -115,14 +115,11 @@ const JobPostingForm = () => {
     }
     setLoading(true);
 
-    console.log("current user",currentUser);
-    console.log("current user.uid",currentUser.uid);
-    console.log("current user.email",currentUser.email);
-
-    
+    console.log("current user", currentUser);
+    console.log("current user.uid", currentUser.uid);
+    console.log("current user.email", currentUser.email);
 
     try {
-
       const postData = {
         ...formData,
         userId: currentUser.uid, // Include user ID
@@ -289,29 +286,12 @@ const JobPostingForm = () => {
                   On demand
                 </label>
               </div>
-              <div className="flex items-center">
-                <input
-                  id="negotiable"
-                  name="employmentType"
-                  type="checkbox"
-                  value="Negotiable"
-                  checked={formData.employmentType.includes("Negotiable")}
-                  onChange={handleInputChange}
-                  className="h-4 w-4 text-firstColor border-gray-300 rounded"
-                />
-                <label
-                  htmlFor="negotiable"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Negotiable
-                </label>
-              </div>
+              {errors.employmentType && (
+                <p className="mt-1 text-red-500 text-sm">
+                  {errors.employmentType}
+                </p>
+              )}
             </div>
-            {errors.employmentType && (
-              <p className="mt-1 text-red-500 text-sm">
-                {errors.employmentType}
-              </p>
-            )}
           </div>
 
           <div>
@@ -319,22 +299,19 @@ const JobPostingForm = () => {
               htmlFor="working-schedule"
               className="block text-sm font-medium text-gray-700"
             >
-              Working schedule
+              Working Schedule
             </label>
-            <select
+            <input
               id="working-schedule"
               name="workingSchedule"
+              type="text"
               value={formData.workingSchedule}
               onChange={handleInputChange}
               className={`mt-1 block w-full px-3 py-2 border ${
                 errors.workingSchedule ? "border-red-500" : "border-thirdColor"
-              } bg-white rounded-md shadow-sm focus:outline-none focus:ring-firstColor focus:border-firstColor sm:text-sm`}
-            >
-              <option value="">Select working schedule</option>
-              <option value="Day shift">Day shift</option>
-              <option value="Night shift">Night shift</option>
-              <option value="Weekend availability">Weekend availability</option>
-            </select>
+              } rounded-md shadow-sm focus:outline-none focus:ring-firstColor focus:border-firstColor sm:text-sm`}
+              placeholder="e.g. 9 AM to 5 PM, Monday to Friday"
+            />
             {errors.workingSchedule && (
               <p className="mt-1 text-red-500 text-sm">
                 {errors.workingSchedule}
@@ -343,115 +320,98 @@ const JobPostingForm = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Salary
+            <label
+              htmlFor="amount"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Amount
             </label>
-            <div className="mt-2 space-y-2">
-              <div className="flex items-center">
-                <input
-                  id="hourly"
-                  name="salaryType"
-                  type="radio"
-                  value="Hourly"
-                  checked={formData.salaryType === "Hourly"}
-                  onChange={handleInputChange}
-                  className="h-4 w-4 text-firstColor border-gray-300"
-                />
-                <label
-                  htmlFor="hourly"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Hourly
-                </label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  id="custom"
-                  name="salaryType"
-                  type="radio"
-                  value="Custom"
-                  checked={formData.salaryType === "Custom"}
-                  onChange={handleInputChange}
-                  className="h-4 w-4 text-firstColor border-gray-300"
-                />
-                <label
-                  htmlFor="custom"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Custom
-                </label>
-              </div>
-              <div className="mt-2">
-                <label
-                  htmlFor="amount"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Amount you want to pay
-                </label>
-                <input
-                  id="amount"
-                  name="amount"
-                  type="text"
-                  value={formData.amount}
-                  onChange={handleInputChange}
-                  className={`mt-1 block w-full px-3 py-2 border ${
-                    errors.amount ? "border-red-500" : "border-thirdColor"
-                  } rounded-md shadow-sm focus:outline-none focus:ring-firstColor focus:border-firstColor sm:text-sm`}
-                  placeholder="35,000"
-                />
-                {errors.amount && (
-                  <p className="mt-1 text-red-500 text-sm">{errors.amount}</p>
-                )}
-              </div>
-              <div className="mt-2">
-                <label
-                  htmlFor="payment-frequency"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  How you want to pay
-                </label>
-                <select
-                  id="payment-frequency"
-                  name="paymentFrequency"
-                  value={formData.paymentFrequency}
-                  onChange={handleInputChange}
-                  className={`mt-1 block w-full px-3 py-2 border ${
-                    errors.paymentFrequency
-                      ? "border-red-500"
-                      : "border-thirdColor"
-                  } bg-white rounded-md shadow-sm focus:outline-none focus:ring-firstColor focus:border-firstColor sm:text-sm`}
-                >
-                  <option value="">Select payment frequency</option>
-                  <option value="Yearly">Yearly</option>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Weekly">Weekly</option>
-                </select>
-                {errors.paymentFrequency && (
-                  <p className="mt-1 text-red-500 text-sm">
-                    {errors.paymentFrequency}
-                  </p>
-                )}
-              </div>
-              <div className="flex items-center mt-2">
-                <input
-                  id="salary-negotiable"
-                  name="salaryNegotiable"
-                  type="checkbox"
-                  checked={formData.salaryNegotiable}
-                  onChange={handleInputChange}
-                  className="h-4 w-4 text-firstColor border-gray-300 rounded"
-                />
-                <label
-                  htmlFor="salary-negotiable"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Salary is negotiable
-                </label>
-              </div>
-            </div>
+            <input
+              id="amount"
+              name="amount"
+              type="text"
+              value={formData.amount}
+              onChange={handleInputChange}
+              className={`mt-1 block w-full px-3 py-2 border ${
+                errors.amount ? "border-red-500" : "border-thirdColor"
+              } rounded-md shadow-sm focus:outline-none focus:ring-firstColor focus:border-firstColor sm:text-sm`}
+              placeholder="Enter amount"
+            />
+            {errors.amount && (
+              <p className="mt-1 text-red-500 text-sm">{errors.amount}</p>
+            )}
+          </div>
+
+          <div>
+            <label
+              htmlFor="salary-type"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Salary Type
+            </label>
+            <select
+              id="salary-type"
+              name="salaryType"
+              value={formData.salaryType}
+              onChange={handleInputChange}
+              className={`mt-1 block w-full px-3 py-2 border ${
+                errors.salaryType ? "border-red-500" : "border-thirdColor"
+              } rounded-md shadow-sm focus:outline-none focus:ring-firstColor focus:border-firstColor sm:text-sm`}
+            >
+              <option value="">Select salary type</option>
+              <option value="Hourly">Hourly</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Bi-Weekly">Bi-Weekly</option>
+              <option value="Monthly">Monthly</option>
+            </select>
             {errors.salaryType && (
               <p className="mt-1 text-red-500 text-sm">{errors.salaryType}</p>
             )}
+          </div>
+
+          <div>
+            <label
+              htmlFor="payment-frequency"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Payment Frequency
+            </label>
+            <select
+              id="payment-frequency"
+              name="paymentFrequency"
+              value={formData.paymentFrequency}
+              onChange={handleInputChange}
+              className={`mt-1 block w-full px-3 py-2 border ${
+                errors.paymentFrequency ? "border-red-500" : "border-thirdColor"
+              } rounded-md shadow-sm focus:outline-none focus:ring-firstColor focus:border-firstColor sm:text-sm`}
+            >
+              <option value="">Select payment frequency</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Bi-Weekly">Bi-Weekly</option>
+              <option value="Monthly">Monthly</option>
+            </select>
+            {errors.paymentFrequency && (
+              <p className="mt-1 text-red-500 text-sm">
+                {errors.paymentFrequency}
+              </p>
+            )}
+          </div>
+
+          <div className="flex items-center">
+            <input
+              id="salary-negotiable"
+              name="salaryNegotiable"
+              type="checkbox"
+              checked={formData.salaryNegotiable}
+              onChange={handleInputChange}
+              className="h-4 w-4 text-firstColor border-gray-300 rounded"
+            />
+            <label
+              htmlFor="salary-negotiable"
+              className="ml-2 block text-sm text-gray-900"
+            >
+              Salary Negotiable
+            </label>
           </div>
 
           <div className="flex items-center">
@@ -467,21 +427,17 @@ const JobPostingForm = () => {
               htmlFor="multiple-candidates"
               className="ml-2 block text-sm text-gray-900"
             >
-              Yes, I am hiring multiple candidates
+              Multiple Candidates
             </label>
           </div>
 
-          <div className="flex justify-end space-x-4">
-            <button
-              type="button"
-              className="px-4 py-2 bg-thirdColor text-gray-700 rounded-md shadow-sm hover:bg-gray-200"
-            >
-              Cancel
-            </button>
+          <div>
             <button
               type="submit"
+              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-firstColor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondColor ${
+                isSubmitDisabled ? "opacity-50 cursor-not-allowed" : ""
+              }`}
               disabled={isSubmitDisabled}
-              className="px-4 py-2 bg-firstColor text-white rounded-md shadow-sm hover:bg-secoundColor"
             >
               Post Job
             </button>
