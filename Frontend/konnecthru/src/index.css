@@ -229,4 +229,26 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  
+  .custom-button-group {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 8rem;
+  }
+  .custom-button-group, .info-button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Media query for smaller screens to stack buttons vertically */
+@media (max-width: 768px) {
+   .info-button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .custom-button-group{
+    margin-bottom: 12rem;
+    }
+    .text-gray-800 {
+      margin-left: 10px;
+    }
+}
