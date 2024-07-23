@@ -2,7 +2,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcase, faCalendarAlt, faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import banner from '../assets/imgs/46.png';
+import banner from '../assets/imgs/69.jpg';
 import reviewImage from '../assets/imgs/review.jpg';
 import '../index.css';  // Import the CSS file
 

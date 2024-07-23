@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ListingComponent from "../components/ListingComponent";
+import '../index.css'; // Make sure to import your CSS file
 
 const ListingPage = () => {
   const [jobListings, setJobListings] = useState([]);
@@ -45,7 +46,7 @@ const ListingPage = () => {
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex flex-col md:flex-row">
           <aside className="md:w-1/4 bg-white p-4 rounded-lg shadow-lg mb-6 md:mb-0 md:mr-6">
             <h2 className="text-xl font-bold mb-4">Filters and Sort</h2>
-            <div className="flex space-x-4">
+            <div className="custom-flex-space">
               <button className="px-3 py-1 bg-red-500 text-white rounded-full">Jobs</button>
               <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full">Interns</button>
               <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full">Alerts</button>
