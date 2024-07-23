@@ -1,5 +1,4 @@
-// src/components/NavBar.jsx
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/Authcontext";
 import { logout } from "../services/authService"; 
@@ -7,6 +6,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo_without_text_no_background.png';  
+import profilePic from '../assets/pic.webp'; // Ensure this path is correct
 
 const NavBarContainer = styled.header`
   display: flex;
@@ -75,8 +75,49 @@ const HamburgerButton = styled.button`
   }
 `;
 
+const ProfileContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+const ProfilePic = styled.img`
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  display: ${props => (props.show ? 'block' : 'none')};
+`;
+
+const DropdownItem = styled.button`
+  padding: 10px 20px;
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  color: #3d52a0;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
@@ -88,6 +129,23 @@ function NavBar() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <NavBarContainer>
@@ -103,8 +161,14 @@ function NavBar() {
         <Button onClick={() => navigate("/job-listings")}>Job Listings</Button>
         {currentUser ? (
           <>
-            <Button primary onClick={() => navigate("/post-a-job")}>Post a job</Button>
-            <Button onClick={handleLogout}>Logout</Button>
+            <Button primary onClick={() => navigate("/post-a-job")}>Post a Job</Button>
+            <ProfileContainer ref={dropdownRef}>
+              <ProfilePic src={profilePic} alt="Profile" onClick={toggleDropdown} />
+              <DropdownMenu show={dropdownOpen}>
+                <DropdownItem onClick={() => navigate("/profile")}>View Profile</DropdownItem>
+                <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
+              </DropdownMenu>
+            </ProfileContainer>
           </>
         ) : (
           <>

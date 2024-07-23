@@ -8,6 +8,7 @@ import JobPostingForm from "./pages/JobPostingForm";
 import ListingPage from "./pages/ListingPage";
 import ReferralListingPage from "./pages/ReferralListingPage";
 import ReferralPostingForm from "./pages/ReferralPostingForm";
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/job-listings" element={<ListingPage />} />
           <Route path="/referral-listings" element={<ReferralListingPage />} />
           <Route path="/post-a-referral" element={<ReferralPostingForm />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </Router>
     </AuthProvider>

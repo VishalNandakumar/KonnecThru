@@ -29,4 +29,17 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.get("/:firebaseUserId", async (req, res) => {
+  try {
+    const user = await User.findOne({ userId: req.params.firebaseUserId });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    res.status(500).json({ message: "Error fetching user details", error: error.message });
+  }
+});
+
 module.exports = router;
