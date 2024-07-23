@@ -2,8 +2,9 @@
 import { createGlobalStyle } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcase, faCalendarAlt, faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import banner from '../assets/imgs/46.png';  
+import banner from '../assets/imgs/46.png';
 import reviewImage from '../assets/imgs/review.jpg';
+import '../index.css';  // Import the CSS file
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -18,171 +19,62 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const styles = {
-  hero: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#333",
-    padding: "50px 20px",
-    backgroundColor: "#fff",
-  },
-  heroTextContainer: {
-    flex: "1",
-    padding: "20px",
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
-    marginBottom: "20px",
-    borderRadius: "5px",
-    textAlign: "center",
-  },
-  heroImage: {
-    flex: "1",
-    width: "80%",
-    height: "auto",
-    maxHeight: "500px",
-    borderRadius: "5px",
-  },
-  heroTitle: {
-    fontSize: "32px",
-    fontWeight: "bold",
-    marginBottom: "20px",
-  },
-  heroText: {
-    fontSize: "18px",
-    marginBottom: "20px",
-  },
-  btn: {
-    backgroundColor: "#3D52A0",
-    color: "#fff",
-    padding: "10px 20px",
-    textDecoration: "none",
-    borderRadius: "5px",
-  },
-  features: {
-    backgroundColor: "#ADBBDA",
-    padding: "50px 20px",
-  },
-  featureContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  feature: {
-    textAlign: "center",
-    marginBottom: "20px",
-  },
-  featureIcon: {
-    fontSize: "50px",
-    color: "#3D52A0",
-    marginBottom: "20px",
-  },
-  featureTitle: {
-    marginBottom: "10px",
-  },
-  testimonials: {
-    backgroundColor: "#F5F6F7",
-    padding: "50px 20px",
-    textAlign: "center",
-  },
-  testimonialsContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "20px",
-    alignItems: "center",
-  },
-  testimonialTitle: {
-    marginBottom: "30px",
-  },
-  testimonial: {
-    backgroundColor: "#fff",
-    padding: "20px",
-    borderRadius: "5px",
-    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-    marginBottom: "20px",
-    width: "90%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  testimonialImage: {
-    width: "80px",
-    height: "80px",
-    borderRadius: "50%",
-    objectFit: "cover",
-    marginBottom: "10px",
-  },
-  testimonialAuthor: {
-    marginTop: "10px",
-  },
-  footer: {
-    backgroundColor: "#3D52A0",
-    color: "#fff",
-    textAlign: "center",
-    padding: "20px 0",
-  },
-  footerContainer: {
-    maxWidth: "1200px",
-    margin: "0 auto",
-  },
-};
-
 function HomePage() {
   return (
     <>
       <GlobalStyle />
 
-      <section style={styles.hero}>
-        <div style={styles.heroTextContainer}>
-          <h2 style={styles.heroTitle}>Welcome to KonnecThru</h2>
-          <p style={styles.heroText}>Your one-stop solution for all part-time job-related needs for students.</p>
-          <a href="/login" style={styles.btn}>Get Started</a>
+      <section className="hero">
+        <div className="heroTextContainer">
+          <h2 className="heroTitle">Welcome to KonnecThru</h2>
+          <p className="heroText">Your one-stop solution for all part-time job-related needs for students.</p>
+          <a href="/login" className="btn">Get Started</a>
         </div>
-        <img src={banner} alt="KonnecThru" style={styles.heroImage} />
+        <img src={banner} alt="KonnecThru" className="heroImage" />
       </section>
 
-      <section style={styles.features}>
-        <div style={styles.featureContainer}>
-          <div style={styles.feature}>
-            <FontAwesomeIcon icon={faBriefcase} style={styles.featureIcon} />
-            <h3 style={styles.featureTitle}>Job Postings</h3>
+      <section className="features">
+        <div className="featureContainer">
+          <div className="feature">
+            <FontAwesomeIcon icon={faBriefcase} className="featureIcon" />
+            <h3 className="featureTitle">Job Postings</h3>
             <p>Easy access to job postings from various employers.</p>
           </div>
-          <div style={styles.feature}>
-            <FontAwesomeIcon icon={faCalendarAlt} style={styles.featureIcon} />
-            <h3 style={styles.featureTitle}>Hiring Events</h3>
+          <div className="feature">
+            <FontAwesomeIcon icon={faCalendarAlt} className="featureIcon" />
+            <h3 className="featureTitle">Hiring Events</h3>
             <p>Stay updated on upcoming hiring events.</p>
           </div>
-          <div style={styles.feature}>
-            <FontAwesomeIcon icon={faUserFriends} style={styles.featureIcon} />
-            <h3 style={styles.featureTitle}>Referral System</h3>
+          <div className="feature">
+            <FontAwesomeIcon icon={faUserFriends} className="featureIcon" />
+            <h3 className="featureTitle">Referral System</h3>
             <p>Get referrals and increase your chances of getting hired.</p>
           </div>
         </div>
       </section>
 
-      <section style={styles.testimonials}>
-        <div style={styles.testimonialsContainer}>
-          <div style={styles.testimonial}>
-            <img src={reviewImage} alt="User" style={styles.testimonialImage} /> 
+      <section className="testimonials">
+        <div className="testimonialsContainer">
+          <div className="testimonial">
+            <img src={reviewImage} alt="User" className="testimonialImage" />
             <p>KonnecThru made my job search so much easier and quicker</p>
-            <h4 style={styles.testimonialAuthor}>- Sunny</h4>
+            <h4 className="testimonialAuthor">- Sunny</h4>
           </div>
-          <div style={styles.testimonial}>
-            <img src={reviewImage} alt="User" style={styles.testimonialImage} />
+          <div className="testimonial">
+            <img src={reviewImage} alt="User" className="testimonialImage" />
             <p>The referral system is a game-changer. I got hired within a week</p>
-            <h4 style={styles.testimonialAuthor}>- Sai</h4>
+            <h4 className="testimonialAuthor">- Sai</h4>
           </div>
-          <div style={styles.testimonial}>
-            <img src={reviewImage} alt="User" style={styles.testimonialImage} />
+          <div className="testimonial">
+            <img src={reviewImage} alt="User" className="testimonialImage" />
             <p>The referral system is a game-changer. I got hired within a week</p>
-            <h4 style={styles.testimonialAuthor}>- Vishal</h4>
+            <h4 className="testimonialAuthor">- Vishal</h4>
           </div>
         </div>
       </section>
-      <footer style={styles.footer}>
-        <div style={styles.footerContainer}>
+
+      <footer className="footer">
+        <div className="footerContainer">
           <p>&copy; 2024 KonnecThru. All rights reserved.</p>
         </div>
       </footer>

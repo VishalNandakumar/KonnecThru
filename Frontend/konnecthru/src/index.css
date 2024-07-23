@@ -1,3 +1,229 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background-color: #F5F6F7;
+    color: #333;
+  }
+  
+  /* Media queries for mobile responsiveness */
+  @media (max-width: 1024px) {
+    .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        color: #ffffff;
+        padding: 50px 1px;        
+    }
+    .heroTextContainer {
+      margin-right: 0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .heroImage {
+        flex: 1;
+        max-width: 55%;
+        height: auto;
+        max-height: 500px;
+        border-radius: 5px;
+      }
+      .testimonialsContainer {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+      }
+  }
+  
+  @media (max-width: 768px) {
+    .heroTitle {
+      font-size: 32px;
+    }
+    .heroText {
+      width: 100%;
+      font-size: 20px;
+    }
+    .featureContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+    .testimonial {
+      flex: 0 1 calc(100% - 40px);
+    }
+  }
+  
+  /* Specific styles */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #333;
+    padding: 50px 10px;
+    background-color: #fff;
+  }
+  
+  .heroTextContainer {
+    flex: 1;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-right: 20px;
+    border-radius: 5px;
+    font-size: 20px;
+  }
+  
+  .heroImage {
+    flex: 1;
+    max-width:35%;
+    height: auto;
+    max-height: 500px;
+    border-radius: 5px;
+  }
+  
+  .heroTitle {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .heroText {
+    font-size: 24px;
+    margin-bottom: 20px;
+    
+  }
+  
+  .btn {
+    background-color: #3D52A0;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .features {
+    background-color: #ADBBDA;
+    padding: 50px 20px;
+  }
+  
+  .featureContainer {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .feature {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .featureIcon {
+    font-size: 50px;
+    color: #3D52A0;
+    margin-bottom: 20px;
+  }
+  
+  .featureTitle {
+    margin-bottom: 10px;
+  }
+  
+  .testimonials {
+    background-color: #F5F6F7;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .testimonialsContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .testimonialTitle {
+    margin-bottom: 30px;
+  }
+  
+  .testimonial {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    flex: 0 1 calc(33.333% - 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .testimonialImage {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .testimonialAuthor {
+    margin-top: 10px;
+  }
+  
+  .footer {
+    background-color: #3D52A0;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .footerContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .loginSection {
+    background-color: #F5F6F7;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .loginContainer {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loginTitle {
+    margin-bottom: 20px;
+  }
+  
+  .loginInput {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .loginButton {
+    background-color: #3D52A0;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
