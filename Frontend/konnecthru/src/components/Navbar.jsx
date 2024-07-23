@@ -101,10 +101,9 @@ function NavBar() {
       <NavButtons open={isOpen}>
         <Button primary onClick={() => navigate("/")}>Home</Button>
         <Button onClick={() => navigate("/job-listings")}>Job Listings</Button>
-        <Button onClick={() => navigate("/referral-listings")}>Referral Listings</Button>
         {currentUser ? (
           <>
-            <Button primary onClick={() => navigate("/dashboard")}>Dashboard</Button>
+            <Button primary onClick={() => navigate("/post-a-job")}>Post a job</Button>
             <Button onClick={handleLogout}>Logout</Button>
           </>
         ) : (

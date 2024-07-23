@@ -126,7 +126,9 @@ const JobPostingForm = () => {
         userEmail: currentUser.email // Include user email
       };
 
-      const response = await fetch('https://konnecthru.onrender.com/api/jobs/jobposting', {
+      const API_URL = import.meta.env.VITE_API_URL;
+
+      const response = await fetch(`${API_URL}/api/jobs/jobposting`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

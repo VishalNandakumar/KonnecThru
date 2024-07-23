@@ -13,8 +13,10 @@ const ReferralListingPage = () => {
       setIsLoading(true);
       setError(null);
       try {
+        const API_URL = import.meta.env.VITE_API_URL;
+
         const response = await fetch(
-          "https://konnecthru.onrender.com/api/referrals/referralpostings"
+          `${API_URL}/api/referrals/referralpostings`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

@@ -11,8 +11,9 @@ const jobSchema = new mongoose.Schema({
     paymentFrequency: { type: String, required: true },
     salaryNegotiable: { type: Boolean, default: false },
     multipleCandidates: { type: Boolean, default: false },
-    userId: { type: String, required: true },
-    userEmail: { type: String, required: true }
+    userId: { type: String, required: true }, // Store userId as a string
+    userEmail: { type: String, required: true },
+    referrals: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Referral' }] // Array of referral ObjectIds
 });
 
-module.exports = mongoose.model('Job', jobSchema);
+module.exports = mongoose.models.Job || mongoose.model('Job', jobSchema);

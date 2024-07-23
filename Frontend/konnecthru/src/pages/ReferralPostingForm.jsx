@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { submitJobPosting } from "../services/referralService";
 import { useAuth } from "../contexts/Authcontext";
 
-const ReferralPostingForm = () => {
+const ReferralPostingForm = ({ jobId, onClose }) => {
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
     referralName: "",
@@ -54,12 +55,13 @@ const ReferralPostingForm = () => {
       try {
         const result = await submitJobPosting({
           ...formData,
+          jobId,
           userEmail: currentUser.email,
-          userID: currentUser.uid,
+          userID: currentUser.uid, // Ensure this is being sent correctly
         });
         console.log("Form submitted successfully:", result);
         alert('Form submitted successfully');
-        // Replace with actual form submission logic
+        onClose(); // Close the form after successful submission
       } catch (error) {
         console.error("Error submitting form:", error.message);
       }
@@ -178,6 +180,7 @@ const ReferralPostingForm = () => {
           <div className="flex justify-end space-x-4">
             <button
               type="button"
+              onClick={onClose}
               className="px-4 py-2 bg-thirdColor text-gray-700 rounded-md shadow-sm hover:bg-gray-200"
             >
               Cancel

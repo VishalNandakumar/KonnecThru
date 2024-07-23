@@ -5,7 +5,9 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 // Simulated function to send data to a backend API
 const saveUserDetailsToBackend = async (userId, userDetails) => {
     try {
-        const response = await fetch('https://konnecthru.onrender.com/api/users/register', {
+        const API_URL = import.meta.env.VITE_API_URL;
+
+        const response = await fetch(`${API_URL}/api/users/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
