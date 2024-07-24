@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import ListingComponent from "../components/ListingComponent";
 
 const ListingPage = () => {
@@ -12,17 +12,22 @@ const ListingPage = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch('https://konnecthru.onrender.com/api/jobs/jobpostings');
+        const response = await fetch(
+          "https://konnecthru.onrender.com/api/jobs/jobpostings"
+        );
         if (!response.ok) {
           // This will capture HTTP errors such as 500, 404 etc.
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        setJobListings(data);
+        const approvedJobs = data.filter(
+          (job) => job.approvalStatus === "approved"
+        );
+        setJobListings(approvedJobs);
       } catch (error) {
         // Here we capture any network error or one thrown from response status check
         setError(`Failed to fetch jobs: ${error.message}`);
-        console.error('Failed to fetch jobs:', error);
+        console.error("Failed to fetch jobs:", error);
       } finally {
         setIsLoading(false);
       }
@@ -46,9 +51,15 @@ const ListingPage = () => {
           <aside className="md:w-1/4 bg-white p-4 rounded-lg shadow-lg mb-6 md:mb-0 md:mr-6">
             <h2 className="text-xl font-bold mb-4">Filters and Sort</h2>
             <div className="flex space-x-4">
-              <button className="px-3 py-1 bg-red-500 text-white rounded-full">Jobs</button>
-              <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full">Interns</button>
-              <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full">Alerts</button>
+              <button className="px-3 py-1 bg-red-500 text-white rounded-full">
+                Jobs
+              </button>
+              <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full">
+                Interns
+              </button>
+              <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full">
+                Alerts
+              </button>
             </div>
           </aside>
           <section className="flex-1 bg-white p-4 rounded-lg shadow-lg">
