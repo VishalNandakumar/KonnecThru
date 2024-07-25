@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import { Button, TextField } from "@mui/material";
-import logo from '../assets/logo_without_text_no_background.png';
-import loginImage from '../assets/login-image.webp';  // Ensure the correct path
+import logo from "../assets/logo_without_text_no_background.png";
+import loginImage from "../assets/login-image.webp"; // Ensure the correct path
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -23,13 +23,9 @@ function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden m-0 md:m-4">
-        <div className="w-full md:w-1/2 p-8" style={{ marginBottom: '13rem' }}>
+        <div className="w-full md:w-1/2 p-8" style={{ marginBottom: "13rem" }}>
           <div className="hidden md:flex items-center justify-center mb-6">
-            <img
-              src={logo}
-              alt="KonnecThru Logo"
-              className="h-10"
-            />
+            <img src={logo} alt="KonnecThru Logo" className="h-10" />
             <h1 className="ml-4 text-2xl font-bold text-gray-800">
               Konnecthru
             </h1>
@@ -78,7 +74,11 @@ function LoginPage() {
           </Button>
           <p className="text-gray-600 text-center mt-4">
             Dont have an account?{" "}
-            <Button variant="text" className="text-blue-600">
+            <Button
+              variant="text"
+              className="text-blue-600"
+              onClick={() => navigate("/signup")}
+            >
               Create an account
             </Button>
           </p>
