@@ -15,6 +15,6 @@ router.get("/jobpostings", async (req, res) => {
   }
 });
 
-router.put("/jobpostings/:id/approve", updateJobStatus);
+router.put("/:id/approve", updateJobStatus);
 
 module.exports = router;
