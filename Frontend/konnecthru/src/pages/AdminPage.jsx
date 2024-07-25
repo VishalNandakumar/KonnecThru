@@ -15,7 +15,6 @@ const AdminPage = () => {
   const [userError, setUserError] = useState(null);
 
   useEffect(() => {
-    // Fetch job postings from the API
     const fetchJobPostings = async () => {
       setIsLoadingJobs(true);
       setJobError(null);
@@ -24,7 +23,6 @@ const AdminPage = () => {
 
         const response = await fetch(`${API_URL}/api/jobs/jobpostings`);
         if (!response.ok) {
-          // This will capture HTTP errors such as 500, 404 etc.
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
@@ -33,7 +31,6 @@ const AdminPage = () => {
         );
         setJobPostings(pendingJobs);
       } catch (error) {
-        // Here we capture any network error or one thrown from response status check
         setJobError(`Failed to fetch jobs: ${error.message}`);
         console.error("Failed to fetch jobs:", error);
       } finally {
@@ -41,7 +38,6 @@ const AdminPage = () => {
       }
     };
 
-    // Fetch referral postings from the API
     const fetchReferralPostings = async () => {
       setIsLoadingReferrals(true);
       setReferralError(null);
@@ -52,13 +48,11 @@ const AdminPage = () => {
           `${API_URL}/api/referrals/referralpostings`
         );
         if (!response.ok) {
-          // This will capture HTTP errors such as 500, 404 etc.
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         setReferralPostings(data);
       } catch (error) {
-        // Here we capture any network error or one thrown from response status check
         setReferralError(`Failed to fetch referrals: ${error.message}`);
         console.error("Failed to fetch referrals:", error);
       } finally {
@@ -66,20 +60,17 @@ const AdminPage = () => {
       }
     };
 
-    // Fetch users from the API
     const fetchUsers = async () => {
       setIsLoadingUsers(true);
       setUserError(null);
       try {
         const API_URL = import.meta.env.VITE_API_URL;
 
-        const response = await fetch(`${API_URL}/api/users//allUsers`);
+        const response = await fetch(`${API_URL}/api/users/allUsers`);
         if (!response.ok) {
-          // This will capture HTTP errors such as 500, 404 etc.
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log("UserDataUserDataUserDataUserData", data);
         setUsers(data);
       } catch (error) {
         setUserError(`Failed to fetch users: ${error.message}`);
@@ -97,12 +88,9 @@ const AdminPage = () => {
   const handleApprove = async (id) => {
     try {
       const API_URL = import.meta.env.VITE_API_URL;
-      const response = await fetch(
-        `${API_URL}/api/jobs/jobpostings/${id}/approve`,
-        {
-          method: "PUT",
-        }
-      );
+      const response = await fetch(`${API_URL}/api/jobs/${id}/approve`, {
+        method: "PUT",
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -137,7 +125,7 @@ const AdminPage = () => {
                     <div className="mt-4">
                       <button
                         className="bg-green-500 text-white px-4 py-2 rounded mr-2"
-                        onClick={handleApprove(job._id)}
+                        onClick={() => handleApprove(job._id)} // Corrected
                       >
                         Approve
                       </button>
