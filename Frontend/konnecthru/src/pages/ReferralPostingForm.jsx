@@ -60,7 +60,7 @@ const ReferralPostingForm = ({ jobId, onClose }) => {
           userID: currentUser.uid, // Ensure this is being sent correctly
         });
         console.log("Form submitted successfully:", result);
-        alert('Form submitted successfully');
+        alert("Form submitted successfully");
         onClose(); // Close the form after successful submission
       } catch (error) {
         console.error("Error submitting form:", error.message);
@@ -72,15 +72,19 @@ const ReferralPostingForm = ({ jobId, onClose }) => {
 
   return (
     <div className="min-h-screen bg-fourthColor flex justify-center items-center py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl w-full space-y-8">
+      <div className="relative max-w-3xl w-full space-y-8 bg-white p-6 rounded-lg shadow-lg">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-2xl"
+        >
+          &times; {/* "X" close icon */}
+        </button>
+
         <h2 className="mt-6 text-center text-3xl font-extrabold text-firstColor">
           Referral Posting
         </h2>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white p-6 rounded-lg shadow-lg space-y-6"
-          method="post"
-        >
+        <form onSubmit={handleSubmit} className="space-y-6" method="post">
           <div>
             <label
               htmlFor="referral-name"

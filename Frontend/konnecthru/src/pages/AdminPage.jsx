@@ -73,15 +73,15 @@ const AdminPage = () => {
       try {
         const API_URL = import.meta.env.VITE_API_URL;
 
-        const response = await fetch(`${API_URL}/api/users/allUsers`);
+        const response = await fetch(`${API_URL}/api/users//allUsers`);
         if (!response.ok) {
           // This will capture HTTP errors such as 500, 404 etc.
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log("UserDataUserDataUserDataUserData", data);
         setUsers(data);
       } catch (error) {
-        // Here we capture any network error or one thrown from response status check
         setUserError(`Failed to fetch users: ${error.message}`);
         console.error("Failed to fetch users:", error);
       } finally {
@@ -93,6 +93,27 @@ const AdminPage = () => {
     fetchReferralPostings();
     fetchUsers();
   }, []);
+
+  const handleApprove = async (id) => {
+    try {
+      const API_URL = import.meta.env.VITE_API_URL;
+      const response = await fetch(
+        `${API_URL}/api/jobs/jobpostings/${id}/approve`,
+        {
+          method: "PUT",
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const updatedJob = await response.json();
+      setJobPostings((prevJobs) =>
+        prevJobs.filter((job) => job._id !== updatedJob._id)
+      );
+    } catch (error) {
+      console.error("Failed to approve job:", error);
+    }
+  };
 
   const renderContent = () => {
     switch (activeSection) {
@@ -114,7 +135,10 @@ const AdminPage = () => {
                     <h3 className="font-semibold">{job.jobTitle}</h3>
                     <p>{job.companyName}</p>
                     <div className="mt-4">
-                      <button className="bg-green-500 text-white px-4 py-2 rounded mr-2">
+                      <button
+                        className="bg-green-500 text-white px-4 py-2 rounded mr-2"
+                        onClick={handleApprove(job._id)}
+                      >
                         Approve
                       </button>
                       <button className="bg-red-500 text-white px-4 py-2 rounded">
@@ -203,12 +227,6 @@ const AdminPage = () => {
               onClick={() => setActiveSection("referrals")}
             >
               Referral Postings
-            </li>
-            <li
-              className="p-4 hover:bg-gray-700 cursor-pointer"
-              onClick={() => setActiveSection("users")}
-            >
-              Users
             </li>
           </ul>
         </nav>

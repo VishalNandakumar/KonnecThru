@@ -53,7 +53,6 @@ const NavButtons = styled.div`
 const Button = styled.button`
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   background-color: ${(props) => (props.primary ? "#3d52a0" : "#e0e0e0")};
@@ -181,7 +180,7 @@ function NavBar() {
         <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
       </HamburgerButton>
       <NavButtons open={isOpen}>
-        <Button primary onClick={() => navigate("/")}>
+        <Button primary onClick={() => navigate("/")} sx={{ borderRadius: 0 }}>
           Home
         </Button>
         <Button onClick={() => navigate("/job-listings")}>Job Listings</Button>

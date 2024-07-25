@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/Authcontext';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/Authcontext";
 
 const JobPostingForm = () => {
   const { currentUser, loading } = useAuth();
@@ -123,27 +123,27 @@ const JobPostingForm = () => {
       const postData = {
         ...formData,
         userId: currentUser.uid, // Include user ID
-        userEmail: currentUser.email // Include user email
+        userEmail: currentUser.email, // Include user email
       };
 
       const API_URL = import.meta.env.VITE_API_URL;
 
       const response = await fetch(`${API_URL}/api/jobs/jobposting`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
-        throw new Error('HTTP error, status = ' + response.status);
+        throw new Error("HTTP error, status = " + response.status);
       }
 
       const result = await response.json();
       console.log("Form submitted successfully:", result);
-      alert('Form submitted successfully');
-      navigate('/'); // Navigate to a success page
+      alert("Form submitted successfully");
+      navigate("/"); // Navigate to a success page
     } catch (error) {
       console.error("Failed to submit the form:", error);
     } finally {
