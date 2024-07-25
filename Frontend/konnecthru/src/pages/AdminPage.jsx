@@ -28,7 +28,10 @@ const AdminPage = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        setJobPostings(data);
+        const pendingJobs = data.filter(
+          (job) => job.approvalStatus === "pending"
+        );
+        setJobPostings(pendingJobs);
       } catch (error) {
         // Here we capture any network error or one thrown from response status check
         setJobError(`Failed to fetch jobs: ${error.message}`);
