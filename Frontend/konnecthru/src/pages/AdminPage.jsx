@@ -6,12 +6,15 @@ const AdminPage = () => {
   const [activeSection, setActiveSection] = useState("jobs");
   const [jobPostings, setJobPostings] = useState([]);
   const [referralPostings, setReferralPostings] = useState([]);
+  const [jobApplications, setJobApplications] = useState([]); // New state for job applications
   const [users, setUsers] = useState([]);
   const [isLoadingJobs, setIsLoadingJobs] = useState(false);
   const [isLoadingReferrals, setIsLoadingReferrals] = useState(false);
+  const [isLoadingApplications, setIsLoadingApplications] = useState(false); // New loading state for job applications
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [jobError, setJobError] = useState(null);
   const [referralError, setReferralError] = useState(null);
+  const [applicationError, setApplicationError] = useState(null); // New error state for job applications
   const [userError, setUserError] = useState(null);
 
   useEffect(() => {
@@ -20,7 +23,6 @@ const AdminPage = () => {
       setJobError(null);
       try {
         const API_URL = import.meta.env.VITE_API_URL;
-
         const response = await fetch(`${API_URL}/api/jobs/jobpostings`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -43,7 +45,6 @@ const AdminPage = () => {
       setReferralError(null);
       try {
         const API_URL = import.meta.env.VITE_API_URL;
-
         const response = await fetch(
           `${API_URL}/api/referrals/referralpostings`
         );
@@ -60,12 +61,35 @@ const AdminPage = () => {
       }
     };
 
+    const fetchJobApplications = async () => {
+      // New function to fetch job applications
+      setIsLoadingApplications(true);
+      setApplicationError(null);
+      try {
+        const API_URL = import.meta.env.VITE_API_URL;
+        const response = await fetch(
+          `${API_URL}/api/job-applications/application-postings`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setJobApplications(data.applications); // Adjust based on your API response
+      } catch (error) {
+        setApplicationError(
+          `Failed to fetch job applications: ${error.message}`
+        );
+        console.error("Failed to fetch job applications:", error);
+      } finally {
+        setIsLoadingApplications(false);
+      }
+    };
+
     const fetchUsers = async () => {
       setIsLoadingUsers(true);
       setUserError(null);
       try {
         const API_URL = import.meta.env.VITE_API_URL;
-
         const response = await fetch(`${API_URL}/api/users/allUsers`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -82,26 +106,9 @@ const AdminPage = () => {
 
     fetchJobPostings();
     fetchReferralPostings();
+    fetchJobApplications(); // Fetch job applications
     fetchUsers();
   }, []);
-
-  const handleApprove = async (id) => {
-    try {
-      const API_URL = import.meta.env.VITE_API_URL;
-      const response = await fetch(`${API_URL}/api/jobs/${id}/approve`, {
-        method: "PUT",
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const updatedJob = await response.json();
-      setJobPostings((prevJobs) =>
-        prevJobs.filter((job) => job._id !== updatedJob._id)
-      );
-    } catch (error) {
-      console.error("Failed to approve job:", error);
-    }
-  };
 
   const renderContent = () => {
     switch (activeSection) {
@@ -123,10 +130,7 @@ const AdminPage = () => {
                     <h3 className="font-semibold">{job.jobTitle}</h3>
                     <p>{job.companyName}</p>
                     <div className="mt-4">
-                      <button
-                        className="bg-green-500 text-white px-4 py-2 rounded mr-2"
-                        onClick={() => handleApprove(job._id)} // Corrected
-                      >
+                      <button className="bg-green-500 text-white px-4 py-2 rounded mr-2">
                         Approve
                       </button>
                       <button className="bg-red-500 text-white px-4 py-2 rounded">
@@ -164,6 +168,39 @@ const AdminPage = () => {
                         Reject
                       </button>
                     </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      case "applications":
+        return (
+          <div>
+            <h2 className="text-xl font-semibold mb-4">Job Applications</h2>
+            {isLoadingApplications ? (
+              <div>Loading...</div>
+            ) : applicationError ? (
+              <div>{applicationError}</div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {jobApplications.map((application) => (
+                  <div
+                    key={application._id}
+                    className="p-4 border rounded bg-white shadow"
+                  >
+                    <h3 className="font-semibold">Application Details</h3>
+                    <p>User ID: {application.userId}</p>
+                    <p>Referral Email: {application.referralEmail || "N/A"}</p>
+                    <p className="mt-2">
+                      <strong>Why Hire Me:</strong> {application.whyHire}
+                    </p>
+                    <p className="mt-2">
+                      <strong>Application Date:</strong>{" "}
+                      {new Date(
+                        application.applicationDate
+                      ).toLocaleDateString()}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -211,16 +248,31 @@ const AdminPage = () => {
               Job Postings
             </li>
             <li
-              className="p-4 hover:bg-gray-700 cursor-pointer"
+              className="p-4 hover
+cursor-pointer"
               onClick={() => setActiveSection("referrals")}
             >
-              Referral Postings
+              Referrals
+            </li>
+            <li
+              className="p-4 hover
+cursor-pointer"
+              onClick={() => setActiveSection("applications")} // New section for job applications
+            >
+              Applications
+            </li>
+            <li
+              className="p-4 hover
+cursor-pointer"
+              onClick={() => setActiveSection("users")}
+            >
+              Users
             </li>
           </ul>
         </nav>
       </div>
-      <div className="flex-1 flex flex-col">
-        <div className="flex-1 overflow-auto p-4">{renderContent()}</div>
+      <div className="px-8 py-6 bg-secondColor flex-1 overflow-y-auto top-content-admin">
+        {renderContent()}
       </div>
     </div>
   );

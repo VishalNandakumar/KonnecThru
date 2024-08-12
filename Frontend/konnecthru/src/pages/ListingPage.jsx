@@ -8,6 +8,13 @@ const ListingPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Filter states
+  const [salaryTypeFilter, setSalaryTypeFilter] = useState("");
+  const [paymentFrequencyFilter, setPaymentFrequencyFilter] = useState("");
+  const [referralFilter, setReferralFilter] = useState("");
+  const [hiringMultipleFilter, setHiringMultipleFilter] = useState("");
+  const [salaryNegotiableFilter, setSalaryNegotiableFilter] = useState("");
+
   useEffect(() => {
     const fetchJobs = async () => {
       setIsLoading(true);
@@ -17,7 +24,6 @@ const ListingPage = () => {
           "https://konnecthru.onrender.com/api/jobs/jobpostings"
         );
         if (!response.ok) {
-          // This will capture HTTP errors such as 500, 404 etc.
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
@@ -26,7 +32,6 @@ const ListingPage = () => {
         );
         setJobListings(approvedJobs);
       } catch (error) {
-        // Here we capture any network error or one thrown from response status check
         setError(`Failed to fetch jobs: ${error.message}`);
         console.error("Failed to fetch jobs:", error);
       } finally {
@@ -41,9 +46,34 @@ const ListingPage = () => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredJobListings = jobListings.filter((job) =>
-    job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Apply filters to job listings
+  const filteredJobListings = jobListings
+    .filter((job) =>
+      job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter((job) => !salaryTypeFilter || job.salaryType === salaryTypeFilter)
+    .filter(
+      (job) =>
+        !paymentFrequencyFilter ||
+        job.paymentFrequency === paymentFrequencyFilter
+    )
+    .filter((job) =>
+      referralFilter === "withReferrals"
+        ? job.referrals.length > 0
+        : referralFilter === "withoutReferrals"
+        ? job.referrals.length === 0
+        : true
+    )
+    .filter(
+      (job) =>
+        hiringMultipleFilter === "" ||
+        job.hiringMultipleCandidates === (hiringMultipleFilter === "true")
+    )
+    .filter(
+      (job) =>
+        salaryNegotiableFilter === "" ||
+        job.salaryNegotiable === (salaryNegotiableFilter === "true")
+    );
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -51,103 +81,83 @@ const ListingPage = () => {
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex flex-col md:flex-row">
           <aside className="w-full md:w-1/3 bg-white p-4 rounded-lg shadow-lg mb-6 md:mb-0 md:mr-6">
             <h2 className="text-xl font-bold mb-4">Filters and Sort</h2>
-            <div className="flex flex-wrap space-x-2 md:space-x-4 mb-4">
-              <button className="px-3 py-1 bg-firstColor text-white rounded-full mb-2 md:mb-0">
-                Part-time
-              </button>
-              <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full mb-2 md:mb-0">
-                Full-time
-              </button>
-              <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full mb-2 md:mb-0">
-                Weekly
-              </button>
-              <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full mb-2 md:mb-0 mt-2">
-                Monthly
-              </button>
-              <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full mb-2 md:mb-0 mt-2">
-                Internship
-              </button>
-            </div>
+
             <div className="mb-4">
-              <label
-                className="block text-gray-700 font-semibold mb-2"
-                htmlFor="location"
-              >
-                Location
+              <label className="block text-gray-700 font-semibold mb-2">
+                Salary Type
               </label>
               <select
-                id="location"
+                value={salaryTypeFilter}
+                onChange={(e) => setSalaryTypeFilter(e.target.value)}
                 className="w-full px-3 py-2 bg-gray-100 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
               >
-                <option>Any</option>
-                <option>Remote</option>
-                <option>New York</option>
-                <option>San Francisco</option>
-                <option>Los Angeles</option>
-                <option>Chicago</option>
+                <option value="">Any</option>
+                <option value="Hourly">Hourly</option>
+                <option value="Salaried">Salaried</option>
+                <option value="Contract">Contract</option>
               </select>
             </div>
+
             <div className="mb-4">
-              <label
-                className="block text-gray-700 font-semibold mb-2"
-                htmlFor="industry"
-              >
-                Industry
+              <label className="block text-gray-700 font-semibold mb-2">
+                Payment Frequency
               </label>
               <select
-                id="industry"
+                value={paymentFrequencyFilter}
+                onChange={(e) => setPaymentFrequencyFilter(e.target.value)}
                 className="w-full px-3 py-2 bg-gray-100 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
               >
-                <option>Any</option>
-                <option>Technology</option>
-                <option>Healthcare</option>
-                <option>Finance</option>
-                <option>Education</option>
-                <option>Retail</option>
+                <option value="">Any</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Bi-Weekly">Bi-weekly</option>
+                <option value="Monthly">Monthly</option>
               </select>
             </div>
+
             <div className="mb-4">
-              <label
-                className="block text-gray-700 font-semibold mb-2"
-                htmlFor="experience"
-              >
-                Experience Level
+              <label className="block text-gray-700 font-semibold mb-2">
+                Referrals
               </label>
               <select
-                id="experience"
+                value={referralFilter}
+                onChange={(e) => setReferralFilter(e.target.value)}
                 className="w-full px-3 py-2 bg-gray-100 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
               >
-                <option>Any</option>
-                <option>Entry Level</option>
-                <option>Mid Level</option>
-                <option>Senior Level</option>
-                <option>Executive</option>
+                <option value="">Any</option>
+                <option value="withReferrals">With Referrals</option>
+                <option value="withoutReferrals">Without Referrals</option>
               </select>
             </div>
+
             <div className="mb-4">
-              <label
-                className="block text-gray-700 font-semibold mb-2"
-                htmlFor="salary"
-              >
-                Salary Range
+              <label className="block text-gray-700 font-semibold mb-2">
+                Hiring Multiple Candidates
               </label>
-              <input
-                type="range"
-                id="salary"
-                name="salary"
-                min="0"
-                max="200000"
-                step="5000"
-                className="w-full"
-              />
-              <div className="flex justify-between text-gray-600 text-sm">
-                <span>$0</span>
-                <span>$200k+</span>
-              </div>
+              <select
+                value={hiringMultipleFilter}
+                onChange={(e) => setHiringMultipleFilter(e.target.value)}
+                className="w-full px-3 py-2 bg-gray-100 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              >
+                <option value="">Any</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
             </div>
-            <button className="w-full px-4 py-2 bg-firstColor text-white font-semibold rounded-md hover:bg-blue-700 transition duration-300">
-              Apply Filters
-            </button>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">
+                Salary Negotiable
+              </label>
+              <select
+                value={salaryNegotiableFilter}
+                onChange={(e) => setSalaryNegotiableFilter(e.target.value)}
+                className="w-full px-3 py-2 bg-gray-100 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              >
+                <option value="">Any</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
           </aside>
 
           <section className="flex-1 bg-white p-4 rounded-lg shadow-lg">

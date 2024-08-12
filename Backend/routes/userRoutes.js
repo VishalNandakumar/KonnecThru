@@ -29,6 +29,16 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.get("/allUsers", async (req, res) => {
+  try {
+    const users = await User.find({});
+    console.log("usersusersusersusers", users);
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching ", error: error });
+  }
+});
+
 router.get("/:firebaseUserId", async (req, res) => {
   try {
     const user = await User.findOne({ userId: req.params.firebaseUserId });
@@ -41,16 +51,6 @@ router.get("/:firebaseUserId", async (req, res) => {
     res
       .status(500)
       .json({ message: "Error fetching user details", error: error.message });
-  }
-});
-
-router.get("/allUsers", async (req, res) => {
-  try {
-    const users = await User.find({});
-    console.log("usersusersusersusers", users);
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching ", error: error });
   }
 });
 

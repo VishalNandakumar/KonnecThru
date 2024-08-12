@@ -13,7 +13,7 @@ export const submitJobPosting = async (formData) => {
         body: JSON.stringify(formData),
       }
     );
-    console.log("formDataformDataformDataformData",formData);
+    console.log("formDataformDataformDataformData", formData);
     if (response.ok) {
       return await response.json();
     } else {
@@ -24,13 +24,12 @@ export const submitJobPosting = async (formData) => {
   }
 };
 
-
 export const getReferralDetails = async (id) => {
   const response = await fetch(`${API_URL}/api/referrals/${id}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   });
 
   if (!response.ok) {
