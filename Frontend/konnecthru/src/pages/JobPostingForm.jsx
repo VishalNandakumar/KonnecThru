@@ -362,9 +362,8 @@ const JobPostingForm = () => {
             >
               <option value="">Select salary type</option>
               <option value="Hourly">Hourly</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Bi-Weekly">Bi-Weekly</option>
-              <option value="Monthly">Monthly</option>
+              <option value="Salaried">Salaried</option>
+              <option value="Contract">Contract</option>
             </select>
             {errors.salaryType && (
               <p className="mt-1 text-red-500 text-sm">{errors.salaryType}</p>

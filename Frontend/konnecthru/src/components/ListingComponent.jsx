@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import ReferralPostingForm from "../pages/ReferralPostingForm"; // Make sure this path is correct
+import ReferralPostingForm from "../pages/ReferralPostingForm"; // Ensure this path is correct
+import JobApplicationForm from "../pages/JobApplicationForm"; // Import the JobApplicationForm component
 import { getReferralDetails } from "../services/referralService"; // Import the function to fetch referral details
 
 const ListingComponent = ({
@@ -15,6 +16,7 @@ const ListingComponent = ({
   referrals, // Pass the referrals as a prop
 }) => {
   const [showReferralForm, setShowReferralForm] = useState(false);
+  const [showJobApplicationForm, setShowJobApplicationForm] = useState(false); // State to toggle Job Application Form
   const [referralDetails, setReferralDetails] = useState([]);
 
   useEffect(() => {
@@ -37,8 +39,13 @@ const ListingComponent = ({
     setShowReferralForm(true);
   };
 
+  const handleApplyClick = () => {
+    setShowJobApplicationForm(true); // Show Job Application Form
+  };
+
   const handleFormClose = () => {
     setShowReferralForm(false);
+    setShowJobApplicationForm(false); // Close Job Application Form
   };
 
   return (
@@ -55,7 +62,7 @@ const ListingComponent = ({
               {workingSchedule}
             </span>
             <span className="bg-gray-200 text-gray-800 px-2 py-1 rounded inline-block">
-              {paymentFrequency}
+              Payment {paymentFrequency}
             </span>
           </div>
 
@@ -63,7 +70,10 @@ const ListingComponent = ({
           <p className="mt-2 text-lg font-bold">Salary: ${amount}</p>
         </div>
         <div className="custom-button-group flex flex-wrap gap-2">
-          <button className="px-3 py-1 text-xs sm:text-sm md:text-base bg-firstColor text-white rounded-full">
+          <button
+            onClick={handleApplyClick}
+            className="px-3 py-1 text-xs sm:text-sm md:text-base bg-firstColor text-white rounded-full"
+          >
             Apply
           </button>
           <button
@@ -76,6 +86,9 @@ const ListingComponent = ({
       </div>
       {showReferralForm && (
         <ReferralPostingForm jobId={_id} onClose={handleFormClose} />
+      )}
+      {showJobApplicationForm && (
+        <JobApplicationForm jobId={_id} onClose={handleFormClose} />
       )}
       <div className="mt-4">
         <h4 className="text-lg font-bold">Referrals:</h4>
