@@ -59,9 +59,12 @@ const getAllJobApplications = async (req, res) => {
 const getJobApplicationsByPosterId = async (req, res) => {
   try {
     const { posterId } = req.params;
+    console.log("posterididididi", posterId);
 
     // Fetch job applications with the specified posterId
-    const applications = await JobApplication.find({ posterId });
+    const applications = await JobApplication.find({ posterId: posterId });
+
+    console.log(applications);
 
     // Respond with the list of job applications
     res.status(200).json({

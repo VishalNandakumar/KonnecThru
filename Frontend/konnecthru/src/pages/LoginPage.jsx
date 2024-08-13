@@ -8,15 +8,41 @@ import loginImage from "../assets/login-image.webp"; // Ensure the correct path
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
+  const validate = () => {
+    let valid = true;
+    let errors = {};
+
+    // Email validation
+    if (!email) {
+      errors.email = "Email is required.";
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Invalid email format.";
+      valid = false;
+    }
+
+    // Password validation
+    if (!password) {
+      errors.password = "Password is required.";
+      valid = false;
+    }
+
+    setErrors(errors);
+    return valid;
+  };
+
   const handleLogin = async () => {
-    try {
-      await login(email, password);
-      alert("Login successful!");
-      navigate("/");
-    } catch (error) {
-      alert(`Failed to login: ${error.message}`);
+    if (validate()) {
+      try {
+        await login(email, password);
+        alert("Login successful!");
+        navigate("/");
+      } catch (error) {
+        alert(`Failed to login: ${error.message}`);
+      }
     }
   };
 
@@ -46,6 +72,8 @@ function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               variant="outlined"
               className="bg-white"
+              error={!!errors.email}
+              helperText={errors.email}
             />
           </div>
           <div className="mb-4">
@@ -57,13 +85,9 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               variant="outlined"
               className="bg-white"
+              error={!!errors.password}
+              helperText={errors.password}
             />
-          </div>
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center">
-              <input type="checkbox" className="h-4 w-4 text-blue-600" />
-              <label className="ml-2 text-gray-600">Remember me</label>
-            </div>
           </div>
           <Button
             onClick={handleLogin}
