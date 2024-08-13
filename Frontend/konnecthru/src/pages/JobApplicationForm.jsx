@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth } from "../contexts/Authcontext";
 import { submitJobApplication } from "../services/jobApplicationService"; // Ensure this import is correct
 
-const JobApplicationForm = ({ jobId, onClose }) => {
+const JobApplicationForm = ({ jobId, posterEmail, posterId, onClose }) => {
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
     whyHire: "",
@@ -36,8 +36,6 @@ const JobApplicationForm = ({ jobId, onClose }) => {
       valid = false;
     }
 
-    // Optional field validation can be added here if needed
-
     setErrors(newErrors);
     return valid;
   };
@@ -50,6 +48,8 @@ const JobApplicationForm = ({ jobId, onClose }) => {
         const applicationData = {
           ...formData,
           jobPostingId: jobId,
+          posterEmail: posterEmail,
+          posterId: posterId,
           userId: currentUser ? currentUser.uid : null,
           applicationDate: new Date().toISOString(),
           applicationStatus: "pending",

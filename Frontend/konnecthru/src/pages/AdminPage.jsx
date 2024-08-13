@@ -6,15 +6,15 @@ const AdminPage = () => {
   const [activeSection, setActiveSection] = useState("jobs");
   const [jobPostings, setJobPostings] = useState([]);
   const [referralPostings, setReferralPostings] = useState([]);
-  const [jobApplications, setJobApplications] = useState([]); // New state for job applications
+  const [jobApplications, setJobApplications] = useState([]);
   const [users, setUsers] = useState([]);
   const [isLoadingJobs, setIsLoadingJobs] = useState(false);
   const [isLoadingReferrals, setIsLoadingReferrals] = useState(false);
-  const [isLoadingApplications, setIsLoadingApplications] = useState(false); // New loading state for job applications
+  const [isLoadingApplications, setIsLoadingApplications] = useState(false);
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [jobError, setJobError] = useState(null);
   const [referralError, setReferralError] = useState(null);
-  const [applicationError, setApplicationError] = useState(null); // New error state for job applications
+  const [applicationError, setApplicationError] = useState(null);
   const [userError, setUserError] = useState(null);
 
   useEffect(() => {
@@ -23,6 +23,7 @@ const AdminPage = () => {
       setJobError(null);
       try {
         const API_URL = import.meta.env.VITE_API_URL;
+
         const response = await fetch(`${API_URL}/api/jobs/jobpostings`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -45,6 +46,7 @@ const AdminPage = () => {
       setReferralError(null);
       try {
         const API_URL = import.meta.env.VITE_API_URL;
+
         const response = await fetch(
           `${API_URL}/api/referrals/referralpostings`
         );
@@ -90,6 +92,7 @@ const AdminPage = () => {
       setUserError(null);
       try {
         const API_URL = import.meta.env.VITE_API_URL;
+
         const response = await fetch(`${API_URL}/api/users/allUsers`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -106,9 +109,27 @@ const AdminPage = () => {
 
     fetchJobPostings();
     fetchReferralPostings();
-    fetchJobApplications(); // Fetch job applications
+    fetchJobApplications();
     fetchUsers();
   }, []);
+
+  const handleApprove = async (id) => {
+    try {
+      const API_URL = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${API_URL}/api/jobs/${id}/approve`, {
+        method: "PUT",
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const updatedJob = await response.json();
+      setJobPostings((prevJobs) =>
+        prevJobs.filter((job) => job._id !== updatedJob._id)
+      );
+    } catch (error) {
+      console.error("Failed to approve job:", error);
+    }
+  };
 
   const renderContent = () => {
     switch (activeSection) {
@@ -130,7 +151,10 @@ const AdminPage = () => {
                     <h3 className="font-semibold">{job.jobTitle}</h3>
                     <p>{job.companyName}</p>
                     <div className="mt-4">
-                      <button className="bg-green-500 text-white px-4 py-2 rounded mr-2">
+                      <button
+                        className="bg-green-500 text-white px-4 py-2 rounded mr-2"
+                        onClick={() => handleApprove(job._id)}
+                      >
                         Approve
                       </button>
                       <button className="bg-red-500 text-white px-4 py-2 rounded">
@@ -174,6 +198,7 @@ const AdminPage = () => {
             )}
           </div>
         );
+
       case "applications":
         return (
           <div>
@@ -189,11 +214,11 @@ const AdminPage = () => {
                     key={application._id}
                     className="p-4 border rounded bg-white shadow"
                   >
-                    <h3 className="font-semibold">Application Details</h3>
-                    <p>User ID: {application.userId}</p>
-                    <p>Referral Email: {application.referralEmail || "N/A"}</p>
+                    <h3 className="font-semibold">{application.jobTitle}</h3>
+                    <p>Applied by: {application.userId}</p>
+                    <p>Email: {application.referralEmail || "N/A"}</p>
                     <p className="mt-2">
-                      <strong>Why Hire Me:</strong> {application.whyHire}
+                      <strong>Why Hire:</strong> {application.whyHire}
                     </p>
                     <p className="mt-2">
                       <strong>Application Date:</strong>{" "}
@@ -248,31 +273,30 @@ const AdminPage = () => {
               Job Postings
             </li>
             <li
-              className="p-4 hover
-cursor-pointer"
+              className="p-4 hover:bg-gray-700 cursor-pointer"
               onClick={() => setActiveSection("referrals")}
             >
-              Referrals
+              Referral Postings
             </li>
+
             <li
-              className="p-4 hover
-cursor-pointer"
-              onClick={() => setActiveSection("applications")} // New section for job applications
+              className="p-4 hover:bg-gray-700 cursor-pointer"
+              onClick={() => setActiveSection("applications")}
             >
-              Applications
+              Job Applications
             </li>
+
             <li
-              className="p-4 hover
-cursor-pointer"
+              className="p-4 hover:bg-gray-700 cursor-pointer"
               onClick={() => setActiveSection("users")}
             >
-              Users
+              All Users
             </li>
           </ul>
         </nav>
       </div>
-      <div className="px-8 py-6 bg-secondColor flex-1 overflow-y-auto top-content-admin">
-        {renderContent()}
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1 overflow-auto p-4">{renderContent()}</div>
       </div>
     </div>
   );

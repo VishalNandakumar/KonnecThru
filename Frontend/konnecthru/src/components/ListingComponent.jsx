@@ -13,7 +13,9 @@ const ListingComponent = ({
   jobDescription,
   amount,
   _id,
-  referrals, // Pass the referrals as a prop
+  referrals,
+  userId,
+  userEmail,
 }) => {
   const [showReferralForm, setShowReferralForm] = useState(false);
   const [showJobApplicationForm, setShowJobApplicationForm] = useState(false); // State to toggle Job Application Form
@@ -67,6 +69,12 @@ const ListingComponent = ({
           </div>
 
           <p className="mt-2 text-lg">{jobDescription}</p>
+          <p className="mt-2 text-lg" hidden>
+            {userEmail}
+          </p>
+          <p className="mt-2 text-lg" hidden>
+            {userId}
+          </p>
           <p className="mt-2 text-lg font-bold">Salary: ${amount}</p>
         </div>
         <div className="custom-button-group flex flex-wrap gap-2">
@@ -88,7 +96,12 @@ const ListingComponent = ({
         <ReferralPostingForm jobId={_id} onClose={handleFormClose} />
       )}
       {showJobApplicationForm && (
-        <JobApplicationForm jobId={_id} onClose={handleFormClose} />
+        <JobApplicationForm
+          jobId={_id}
+          posterEmail={userEmail}
+          posterId={userId}
+          onClose={handleFormClose}
+        />
       )}
       <div className="mt-4">
         <h4 className="text-lg font-bold">Referrals:</h4>
