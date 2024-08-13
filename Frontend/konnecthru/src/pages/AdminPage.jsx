@@ -126,6 +126,7 @@ const AdminPage = () => {
       setJobPostings((prevJobs) =>
         prevJobs.filter((job) => job._id !== updatedJob._id)
       );
+      alert("Job Posting Approved Successfully");
     } catch (error) {
       console.error("Failed to approve job:", error);
     }

@@ -13,7 +13,7 @@ const NotificationsPage = () => {
       try {
         if (currentUser) {
           const response = await fetch(
-            `${API_URL}/api/job-applications/application-postings?posterId=${currentUser.uid}`
+            `${API_URL}/api/job-applications/application-postings/poster/${currentUser.uid}`
           );
 
           if (!response.ok) {
