@@ -17,4 +17,4 @@ const jobSchema = new mongoose.Schema({
   approvalStatus: { type: String, default: "pending" },
 });
 
-module.exports = mongoose.models.Job || mongoose.model("Job", jobSchema);
+module.exports = mongoose.model("Job", jobSchema);
