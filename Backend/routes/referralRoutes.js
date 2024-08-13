@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Referral = require("../models/Referral");
 const mongoose = require("mongoose");
-const Job = require("../models/Job"); // Import Job model
 const User = require("../models/User"); // Import User model if needed for notifications
 
 router.post("/referral-post", async (req, res) => {
