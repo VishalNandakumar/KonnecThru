@@ -10,6 +10,7 @@ import ReferralListingPage from "./pages/ReferralListingPage";
 import ReferralPostingForm from "./pages/ReferralPostingForm";
 import ProfilePage from "./pages/ProfilePage";
 import AdminPage from "./pages/AdminPage";
+import NotificationsPage from "./pages/NotificationsPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/post-a-referral" element={<ReferralPostingForm />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
         </Routes>
       </Router>
     </AuthProvider>

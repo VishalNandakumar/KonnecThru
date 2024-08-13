@@ -6,7 +6,8 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/logo_without_text_no_background.png";
-import profilePic from "../assets/pic.webp"; // Ensure this path is correct
+import profilePic from "../assets/pic.webp";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const NavBarContainer = styled.header`
   display: flex;
@@ -85,6 +86,18 @@ const ProfilePic = styled.img`
   width: 40px;
   border-radius: 50%;
   cursor: pointer;
+`;
+
+const NotificationContainer = styled.div`
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
 `;
 
 const DropdownMenu = styled.div`
@@ -207,6 +220,9 @@ function NavBar() {
                 <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
               </DropdownMenu>
             </ProfileContainer>
+            <NotificationContainer onClick={() => navigate("/notifications")}>
+              <NotificationsIcon />
+            </NotificationContainer>
           </>
         ) : (
           <>

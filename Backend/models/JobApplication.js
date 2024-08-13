@@ -7,10 +7,11 @@ const jobApplicationSchema = new mongoose.Schema({
     ref: "Job",
     required: true,
   },
+  posterEmail: { type: String, required: true },
+  posterId: { type: String, require: true },
   applicationStatus: { type: String, default: "pending" },
   applicationDate: { type: Date, default: Date.now },
   referralEmail: { type: String },
-  referralId: { type: mongoose.Schema.Types.ObjectId, ref: "Referral" },
   whyHire: { type: String },
 });
 
