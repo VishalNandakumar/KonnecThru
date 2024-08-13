@@ -1,5 +1,5 @@
 // jobController.js
-const Job = require("../models/job"); // Assuming you have a Job model
+const Job = require("../models/Job"); // Assuming you have a Job model
 
 // Post a job
 exports.postJob = async (req, res) => {

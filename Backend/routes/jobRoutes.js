@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { postJob, updateJobStatus } = require("../controllers/jobController");
-const Job = require("../models/job");
+const Job = require("../models/Job");
 
 // POST endpoint for job posting
 router.post("/jobposting", postJob);
