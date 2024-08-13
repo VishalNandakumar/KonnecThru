@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 // Test route
-router.get('/test', (req, res) => {
-    res.status(200).send('Test route is working!');
+router.get('/Check-status', (req, res) => {
+    res.status(200).send('Your backend is Up and working! 🎉🎉🎉🎉');
 });
 
 module.exports = router;
